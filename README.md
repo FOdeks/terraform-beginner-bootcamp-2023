@@ -51,11 +51,13 @@ The Terraform CLI installation instructions have changed due to gpg keyring chan
 
 ### Considerations for Linux Distribution
 
-This project is built against Ubuntu. Please consider checking your Linux Distribution and change accordingly to your needs.
+This project is built against Ubuntu.
+Please consider checking your Linux Distribution and change accordingly to your needs.
 
 [How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
 
 Example of checking OS version
+
 ```
 $ cat /etc/os-release
 
@@ -80,10 +82,10 @@ While fixing the Terraform CLI gpg deprecation issues, we noticed that the bash 
 This bash script is located here: [./bin/install_terraform_cli](./bin/install_terraform_cli).
 
 - This will keep the Gitpod Task File ([.gitpod.yml](.gitpod.yml)) tidy.
-- this will allow us an easier way to debug and execute manually Terraform CLI install.
+- This will allow us an easier way to debug and execute manually Terraform CLI install.
 - This will allow better portability for other projects that need to install Terraform CLI.
 
-#### Shebang
+#### Shebang Considerations
 
 A Shebang (pronounced Sha-bang) tells the bash script what program will interpret the script. e.g. `#!/bin/bash`
 
@@ -120,8 +122,7 @@ chmod 744 ./bin/install_terraform_cli
 
 https://en.wikipedia.org/wiki/Chmod
 
-
-### Gitpod Lifecycle (Before, Init, Command)
+## Gitpod Lifecycle (Before, Init, Command)
 
 We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
 
