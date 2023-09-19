@@ -23,7 +23,7 @@ The Terraform CLI installation instructions have changed due to gpg keyring chan
 
 ### Considerations for Linux Distribution
 
-This project is built against Ubuntu.
+This project is built using Ubuntu.
 Please consider checking your Linux Distribution and change accordingly to your needs.
 
 [How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
@@ -79,7 +79,7 @@ e.g. `source ./bin/install_terraform_cli`
 
 #### Linux Permissions Considerations
 
-In oorder to make our bash scripts executable, we need to change the linux permission for the file to be executable at the user mode.
+In order to make our bash scripts executable, we need to change the linux permission for the file to be executable at the user mode.
 
 ```sh
 chmod u+x ./bin/install_terraform_cli
@@ -96,6 +96,6 @@ https://en.wikipedia.org/wiki/Chmod
 
 ### Gitpod Lifecycle (Before, Init, Command)
 
-we need to be careful when using the `Init` because it will not rerun if we restart an existing workspace.
+We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
