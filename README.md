@@ -1,6 +1,34 @@
 # Terraform Beginner Bootcamp 2023
 
-## Semantic Versioning :mage:
+- [Semantic Versioning](#semantic-versioning)
+- [Install the Terraform CLI](#install-the-terraform-cli)
+  * [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
+  * [Considerations for Linux Distribution](#considerations-for-linux-distribution)
+  * [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
+    + [Shebang Considerations](#shebang-considerations)
+    + [Execution Considerations](#execution-considerations)
+    + [Linux Permissions Considerations](#linux-permissions-considerations)
+- [Gitpod Lifecycle](#gitpod-lifecycle)
+- [Working Env Vars](#working-env-vars)
+  * [env command](#env-command)
+  * [Setting and Unsetting Env Vars](#setting-and-unsetting-env-vars)
+  * [Printing Vars](#printing-vars)
+  * [Scoping of Env Vars](#scoping-of-env-vars)
+  * [Persisting Env Vars in Gitpod](#persisting-env-vars-in-gitpod)
+- [AWS CLI Installation](#aws-cli-installation)
+- [Terraform Basics](#terraform-basics)
+  * [Terraform Registry](#terraform-registry)
+  * [Terraform Console](#terraform-console)
+    + [Terraform Init](#terraform-init)
+    + [Terraform Plan](#terraform-plan)
+    + [Terraform Apply](#terraform-apply)
+    + [Terraform Destroy](#terraform-destroy)
+    + [Terraform Lock Files](#terraform-lock-files)
+    + [Terraform State Files](#terraform-state-files)
+    + [Terraform Directory](#terraform-directory)
+- [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
+
+## Semantic Versioning
 
 This project is going to utilize semantic versioning for its tagging.
 [semver.org](https://semver.org/)
@@ -23,8 +51,7 @@ The Terraform CLI installation instructions have changed due to gpg keyring chan
 
 ### Considerations for Linux Distribution
 
-This project is built using Ubuntu.
-Please consider checking your Linux Distribution and change accordingly to your needs.
+This project is built against Ubuntu. Please consider checking your Linux Distribution and change accordingly to your needs.
 
 [How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
 
@@ -50,7 +77,7 @@ UBUNTU_CODENAME=jammy
 
 While fixing the Terraform CLI gpg deprecation issues, we noticed that the bash scripts steps were a considerable amount of code. So we decided to create a bash script to install the Terrafom CLI.
 
-This bash script is located here: [./bin/install_terraform_cli](./bin/install_terraform_cli.sh).
+This bash script is located here: [./bin/install_terraform_cli](./bin/install_terraform_cli).
 
 - This will keep the Gitpod Task File ([.gitpod.yml](.gitpod.yml)) tidy.
 - this will allow us an easier way to debug and execute manually Terraform CLI install.
