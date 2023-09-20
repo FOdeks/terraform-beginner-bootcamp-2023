@@ -136,7 +136,7 @@ We can filter specific env vars using grep e.g. `env | grep AWS_`
 
 #### Setting and Unsetting Env Vars
 
-In the terminal, we can set using `export HELLO-'world'`
+In the terminal, we can set using `export HELLO='world'`
 
 In the terminal, we can unset using `unset HELLO`
 
