@@ -242,9 +242,9 @@ If we want to automatically approve an apply we can provide the auto approve fla
 
 `teraform destroy`
 
-This will destroy resources provisioned using Terraform.
+This will destroy only resources provisioned using Terraform.
 
-You can also use the auto approve flag to skip the approve prompt e.g. `terraform apply --auto-approve`
+You can also use the **auto approve** flag to skip the approve prompt e.g. `terraform apply --auto-approve`
 
 #### Terraform Lock Files
 
@@ -275,3 +275,8 @@ This is the previous state file state.
 `.terraform`
 
 This contains directory contains binaries of Terraform providers.
+
+#### Note: S3 Bucket Creation
+[Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
+
+In creating the S3 Bucket, using the random provider, it was initally discovered that some of the naming rules were violated. Upper case characters were generataed. We then reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
