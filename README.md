@@ -275,3 +275,8 @@ This is the previous state file state.
 `.terraform`
 
 This contains directory contains binaries of Terraform providers.
+
+#### Note: S3 Bucket Creation
+[Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
+
+In creating the S3 Bucket, using the random provider, it was initally discovered that some of the naming rules were violated. We reviewed the rules and then reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
