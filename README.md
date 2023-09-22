@@ -280,3 +280,32 @@ This contains directory contains binaries of Terraform providers.
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
 In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We then reviewed the Random documentation and reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
+
+## Issues with Terraform Cloud Login and Gitpod Workspace
+
+When attempting to run `terraform login`, it will launch in bash a wiswig view to generate a token. However, it does not work as expected in Gitpod VS Code in the browser.
+
+The workaround is manually generate a token in Terraform Cloud
+
+```
+https://app.terraform.io/app/settings/tokens?source=terraform-login
+```
+
+Then create and open the file manually here:
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+
+Provide the following code (replace your token in the file):
+
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR-TERRAFORM-CLOUD-TOKEN"
+    }
+  }
+}
+```
