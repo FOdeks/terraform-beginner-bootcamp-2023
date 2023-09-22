@@ -279,4 +279,4 @@ This contains directory contains binaries of Terraform providers.
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
-In creating the S3 Bucket, using the random provider, it was initally discovered that some of the naming rules were violated. Upper case characters were generataed. We then reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
+In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We then reviewed the Random documentation and reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
