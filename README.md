@@ -314,7 +314,7 @@ We have automated this workaround with the following bash script [bin/generate_t
 
 ## Simple GitHub Code Update Flow
 
-<img src="C:\Users\femio\OneDrive\Pictures\Screenshots\github_flow.png" alt="GitHub Flow">
+<img src="C:\Users\femio\OneDrive\Pictures\Screenshots\github_flow.jpg" alt="GitHub Flow">
 
 
 
