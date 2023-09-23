@@ -275,7 +275,7 @@ This is the previous state file state.
 `.terraform`
 
 This contains directory contains binaries of Terraform providers.
-
+## Create S3 Bucket
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
@@ -314,7 +314,7 @@ We have automated this workaround with the following bash script [bin/generate_t
 
 ## Simple GitHub Code Update Flow
 
-![GitHub Flow](C:\Users\femio\OneDrive\Pictures\Screenshots\github_flow.png)
+![GitHub Flow](assets/github_flow.jpg)
 
 
 
