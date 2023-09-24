@@ -1,5 +1,7 @@
 # Terraform Beginner Bootcamp 2023
 
+## Table of Content
+
 - [Semantic Versioning](#semantic-versioning)
 - [Install the Terraform CLI](#install-the-terraform-cli)
   * [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
@@ -26,7 +28,9 @@
     + [Terraform Lock Files](#terraform-lock-files)
     + [Terraform State Files](#terraform-state-files)
     + [Terraform Directory](#terraform-directory)
+- [Create S3 Bucket](#create-s3-bucket)
 - [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
+- [Simple GitHub Code Update Flow](#simple-github-code-update-flow)
 
 ## Semantic Versioning
 
