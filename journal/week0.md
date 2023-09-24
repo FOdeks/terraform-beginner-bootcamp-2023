@@ -317,4 +317,5 @@ We have automated this workaround with the following bash script [bin/generate_t
 
 ## Simple GitHub Code Update Flow
 
-![GitHub Flow](assets/github_flow.jpg)
+![github_flow](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/3fae048d-4892-4391-989a-661eaebe1f9d)
+
