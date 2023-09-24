@@ -27,7 +27,7 @@
     + [Terraform Lock Files](#terraform-lock-files)
     + [Terraform State Files](#terraform-state-files)
     + [Terraform Directory](#terraform-directory)
-- [Create S3 Bucket](#create-s3-bucket)
+  * [Create S3 Bucket](#create-s3-bucket)
 - [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
 - [Simple GitHub Code Update Flow](#simple-github-code-update-flow)
 
@@ -278,7 +278,7 @@ This is the previous state file state.
 `.terraform`
 
 This contains directory contains binaries of Terraform providers.
-## Create S3 Bucket
+### Create S3 Bucket
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
