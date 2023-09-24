@@ -125,19 +125,21 @@ chmod 744 ./bin/install_terraform_cli
 
 https://en.wikipedia.org/wiki/Chmod
 
-## Gitpod Lifecycle (Before, Init, Command)
+## Gitpod Lifecycle
 
 We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
-### Working ENV Vars
+## Working Env Vars
+
+### env command
 
 We can list out all Environment Variables (Env Vars) using the `env` command.
 
 We can filter specific env vars using grep e.g. `env | grep AWS_`
 
-#### Setting and Unsetting Env Vars
+### Setting and Unsetting Env Vars
 
 In the terminal, we can set using `export HELLO='world'`
 
