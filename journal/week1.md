@@ -22,31 +22,47 @@ Note: ChatGPT was used to generate the tree structure in ASCII format.
 
 ### Terraform Cloud Variables
 
-In Terraform we can set two kind of variables:
-- Enviroment Variables - those you would set in your bash terminal eg. AWS credentials
-- Terraform Variables - those that you would normally set in your tfvars file
+We can set two kinds of variables in Terraform Cloud:
+- Environment Variables - those you would set in your bash terminal eg. AWS credentials
+- Terraform Variables - those that you would normally set in your `.tfvars` file
 
-We can set Terraform Cloud variables to be sensitive so they are not shown visibly in the UI.
+We can set variables in Terraform Cloud to be sensitive so they are not visible (i.e. masked) in the UI.
 
 ### Loading Terraform Input Variables
 
 [Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
 
 ### var flag
-We can use the `-var` flag to set an input variable or override a variable in the tfvars file e.g. `terraform -var user_uuid="my-user_id"`
+We can use the `-var` flag to set an input variable or override a variable in the `.tfvars` file e.g.
+```
+terraform plan -var user_uuid="my-user_id"
+```
 
 ### var-file flag
+We can use the `-var-file` flag to specify a variable file that contains values for our variables e.g. 
+```
+terraform apply -var-file=my_variables.tfvars
+```
 
-- TODO: document this functionality
+### terraform.tfvars
+We can use the `terraform.tfvars` file when we want our default variables to be automatically loaded by Terraform. This file must be in the same directory as the Terraform configuration files. We don't need to specify this file explicitly when running Terraform commands. 
 
-### terraform.tvfars
+### *.auto.tfvars
+We can use the `*.auto.tfvars` files to automatically load default variable values without explicitly specifying them when running Terraform commands. These files are particularly useful when you want to manage variable values for different workspaces e.g. development, staging and production environments
+```
+dev.auto.tfvars
+staging.auto.tfvars
+prod.auto.tfvars
+```
+In each *.auto.tfvars file, we can define variable values specific to the respective workspace.
 
-This is the default file to load in terraform variables in bulk.
+For example, if you set your Terraform workspace to `dev`, Terraform will load `dev.auto.tfvars` and use the values from that file for your variables:
+```
+terraform workspace select dev
+terraform apply
+```
+If you switch to a different workspace, Terraform will load the corresponding `*.auto.tfvars` file for that workspace.
 
-### auto.tfvars
-
-- TODO: document this functionality for terraform cloud.
-
-### order of terraform variables
+### Order of Terraform Variables
 
 - TODO: document which terraform variables takes precedence.
