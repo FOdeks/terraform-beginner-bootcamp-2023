@@ -1,4 +1,5 @@
 # Terraform Beginner Bootcamp 2023 - Week 0
+## Project Preparation
 
 ![architecture_diagram_week0](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/c4faffb1-d12c-42ee-bbda-53faef918d1e)
 
