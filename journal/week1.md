@@ -78,7 +78,7 @@ You can use terraform import but it may not work for all cloud resources. You ne
 ### Fix Missing Resources with Terraform Import
 
 ```sh
-terraform import aws_s3_bucket.bucket bucket-name
+terraform import aws_s3_bucket.bucket bucket_name
 ```
 
 [Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
@@ -86,12 +86,46 @@ terraform import aws_s3_bucket.bucket bucket-name
 
 ### Fix Manual Configuration
 
-If someone goes and deletes or modifies cloud resource manually through ClickOps. 
-
-If we run Terraform plan again, it will attempt to put our infrastructure back into the expected state fixing Configuration Drift.
+If someone mistakenly deletes or modifies cloud resource manually through ClickOps, if we run `terraform plan` again, it will attempt to put our infrastructure back into the expected state by fixing Configuration Drift.
 
 
+### Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules
+
+### Terraform Module Structure
+
+It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you like.
+
+### Passing Input Variables
+
+We can pass input variables to our module.
+The module has to declare the Terraform variables in its own `variables.tf`.
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import the module from various places eg:
+- locally
+- Github
+- Terraform Registry
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+}
+```
 
 
-
-
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
