@@ -34,13 +34,13 @@ We can set variables in Terraform Cloud to be sensitive so they are not visible 
 
 ### var flag
 We can use the `-var` flag to set an input variable or override a variable in the `.tfvars` file e.g.
-```
+```sh
 terraform plan -var user_uuid="my-user_id"
 ```
 
 ### var-file flag
 We can use the `-var-file` flag to specify a variable file that contains values for our variables e.g. 
-```
+```sh
 terraform apply -var-file=my_variables.tfvars
 ```
 
@@ -57,7 +57,7 @@ prod.auto.tfvars
 In each *.auto.tfvars file, we can define variable values specific to the respective workspace.
 
 For example, if you set your Terraform workspace to `dev`, Terraform will load `dev.auto.tfvars` and use the values from that file for your variables:
-```
+```sh
 terraform workspace select dev
 terraform apply
 ```
@@ -66,3 +66,32 @@ If you switch to a different workspace, Terraform will load the corresponding `*
 ### Order of Terraform Variables
 
 - TODO: document which terraform variables takes precedence.
+
+## Dealing With Configuration Drift
+
+## What happens if we lose our State file?
+
+If you lose your state file, you will most likley have to destroy all your cloud infrastructure manually.
+
+You can use terraform import but it may not work for all cloud resources. You need to check the Terraform Registry providers documentation for which resources support import.
+
+### Fix Missing Resources with Terraform Import
+
+```sh
+terraform import aws_s3_bucket.bucket bucket-name
+```
+
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+[AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+### Fix Manual Configuration
+
+If someone goes and deletes or modifies cloud resource manually through ClickOps. 
+
+If we run Terraform plan again, it will attempt to put our infrastructure back into the expected state fixing Configuration Drift.
+
+
+
+
+
+
