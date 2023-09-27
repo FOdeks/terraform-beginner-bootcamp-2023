@@ -257,3 +257,69 @@ resource "example_database" "test" {
 }
 ```
 [Terraform Data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+## Provisioners
+
+Provisioners allow you to execute commands on compute instances e.g. AWS CLI command. They are not recommended for use by **Hashicorp** because Configuration Management tools such as Ansible are a better fit, but the functionality exists to be used as a last resort. You can use provisioners to model specific actions on the local machine or on a remote machine in order to prepare servers or other infrastructure objects for service.
+
+[Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+### Local-exec
+
+This will execute a command on the machine running the Terraform commands e.g. `terraform plan` and `terraform apply`:
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo The server's IP address is ${self.private_ip}"
+  }
+}
+```
+
+https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec
+
+### Remote-exec
+
+This will execute commands on a machine which you target. You will need to provide credentials such as `ssh` to get into the machine.
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+```
+https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec
+
+The use of Terraform's `remote-exec` and `local-exec` provisioners is not recommended for several reasons:
+
+1. **Limited Idempotence:** Terraform is designed to be idempotent, meaning you can run `terraform apply` multiple times, and it should converge to the desired state without unintended changes. When you use `local-exec` or `remote-exec`, you're executing arbitrary commands on the local machine or a remote host, and these commands might not be idempotent. If the script fails or is run multiple times, it can lead to unpredictable or unwanted changes.
+
+2. **Security Concerns:** Running arbitrary local or remote commands as part of your infrastructure provisioning can introduce security risks. If the Terraform configuration is used in a shared environment or by multiple users, it's important to carefully review and audit any scripts that are executed. Unauthorized or malicious code could be run if not properly secured.
+
+3. **Limited Portability:** Terraform is designed to be cloud-agnostic, allowing you to manage resources across various cloud providers and services. Using `local-exec` or `remote-exec` ties your infrastructure provisioning to specific local or remote environments, making it less portable and more challenging to manage in a multi-cloud or hybrid cloud setup.
+
+4. **Dependency on External Tools:** `local-exec` and `remote-exec` depend on external tools and scripts to perform actions outside of Terraform. This can lead to compatibility issues, especially if the required tools or scripts change or become unavailable.
+
+5. **Lack of Reusability:** Terraform modules and providers provide a structured and reusable way to define and manage infrastructure resources. Using provisioners like `local-exec` or `remote-exec` often leads to ad-hoc, one-off solutions that are less reusable and harder to maintain.
+
+6. **Limited Error Handling:** These provisioners have limited error handling capabilities. If a command executed via `local-exec` or `remote-exec` fails, it may not provide sufficient information or mechanisms for handling errors gracefully and recovering from failures.
+
+While `local-exec` and `remote-exec` can be useful for certain tasks during development or for quick-and-dirty solutions, they should generally be avoided for critical production workloads. Instead, consider using Terraform's native resource types, data sources, and providers to manage your infrastructure resources. For more complex automation and configuration management tasks, you can integrate Terraform with dedicated automation tools or use Terraform in combination with other infrastructure as code (IAC) solutions like Ansible, Puppet, or Chef, which are designed for such tasks and offer better error handling, idempotence, and security controls.
+
