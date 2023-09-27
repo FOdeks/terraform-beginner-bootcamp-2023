@@ -194,10 +194,43 @@ In terraform there is a special variable called `path` that allows us to referen
 resource "aws_s3_object" "error_html" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "error.html"
-  source = "${path.root}/public/error.html"
+  source = "${path.root}/public/index.html"
+}
 
-  etag = filemd5(var.error_html_filepath)
+## Terraform Locals
+
+**Locals** - This is used to define local variables. It can be very useful when we need to transform data into another format and we have to reference a variable.
+
+```tf
+locals {
+  s3_origin_id = "MyS3Origin"
 }
 ```
+[Local Values](https://developer.hashicorp.com/terraform/language/values/locals)
+
+## Terraform Data Sources
+
+This allows us to source data from cloud resources. This is useful when we want to reference cloud resources without importing them.
+
+```tf
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+[Data Sources](https://developer.hashicorp.com/terraform/language/data-sources)
+
+## Working with JSON 
+
+We use the ``jsonencode`` function to create the bucket policy (in JSON) inline in the **HCL**. ``jsonencode`` encodes a given value to a string using JSON sytax. 
+
+```tf
+> jsonencode({"hello"="world"})
+{"hello":"world"}
+```
+
+[jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
 
 
