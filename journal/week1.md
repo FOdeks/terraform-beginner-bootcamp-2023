@@ -323,3 +323,14 @@ The use of Terraform's `remote-exec` and `local-exec` provisioners is not recomm
 
 While `local-exec` and `remote-exec` can be useful for certain tasks during development or for quick-and-dirty solutions, they should generally be avoided for critical production workloads. Instead, consider using Terraform's native resource types, data sources, and providers to manage your infrastructure resources. For more complex automation and configuration management tasks, you can integrate Terraform with dedicated automation tools or use Terraform in combination with other infrastructure as code (IAC) solutions like Ansible, Puppet, or Chef, which are designed for such tasks and offer better error handling, idempotence, and security controls.
 
+## For Each Expressions
+
+For each allows us to enumerate over complex data types e.g.
+
+```sh
+[for s in var.list : upper(s)]
+```
+
+This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive Terraform code.
+
+[For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
