@@ -9,7 +9,7 @@ town="cooker-cove"
 content_version=1
 
 # Enable printing of commands
-#set -x
+# set -x
 
 RESPONSE=$(curl -X POST \
 --silent \

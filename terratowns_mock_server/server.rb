@@ -116,8 +116,8 @@ class TerraTownsMockServer < Sinatra::Base
 
     # a begin/resource is a try/catch, if an error occurs, result it.
     begin
-      # Sinatra does not automatically part json bodys as parameters
-      # like rails so we need to manuall parse it.
+      # Sinatra does not automatically parse JSON bodies as parameters
+      # like Rails so we need to manually parse it.
       payload = JSON.parse(request.body.read)
     rescue JSON::ParserError
       halt 422, "Malformed JSON"
@@ -131,7 +131,7 @@ class TerraTownsMockServer < Sinatra::Base
     content_version = payload["content_version"]
     town = payload["town"]
 
-    # Printing the variables out to console to make it eaiser
+    # Printing the variables out to console to make it easier
     # to see or debug what we have inputed into this endpoint
     puts "name #{name}"
     puts "description #{description}"
@@ -147,14 +147,14 @@ class TerraTownsMockServer < Sinatra::Base
     home.domain_name = domain_name
     home.content_version = content_version
     
-    # ensure our validation checks pass otherwise
+    # Ensure our validation checks pass otherwise
     # return the errors
     unless home.valid?
-      # return the error messages back as json
+      # return the error messages back as JSON
       error 422, home.errors.messages.to_json
     end
 
-    # generating a uuid at random
+    # Generating a uuid at random
     uuid = SecureRandom.uuid
     puts "uuid #{uuid}"
     # We will mock save our data to our mock database
@@ -168,7 +168,7 @@ class TerraTownsMockServer < Sinatra::Base
       content_version: content_version
     }
 
-    # will just return uuid
+    # We will just return the uuid
     return { uuid: uuid }.to_json
   end
 
@@ -181,7 +181,7 @@ class TerraTownsMockServer < Sinatra::Base
     # checks for house limit
 
     content_type :json
-    # does the uuid for the home match the one in our mock database
+    # Does the uuid for the home match the one in our mock database
     if params[:uuid] == $home[:uuid]
       return $home.to_json
     else
