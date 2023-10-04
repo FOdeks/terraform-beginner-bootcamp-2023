@@ -6,7 +6,7 @@
 ## Weekly Journals
 - [Week 0 Journal - Project Preparation](journal/week0.md)
 - [Week 1 Journal - Building Terrahouse](journal/week1.md)
-- [Week 2 Journal - Building Terrahouse](journal/week2.md) 
+- [Week 2 Journal - Deploying To Terrahouse](journal/week2.md) 
  
 ## Extras
 - [GitHub Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
