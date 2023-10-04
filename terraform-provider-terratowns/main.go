@@ -34,8 +34,7 @@ type Config struct {
 
 // in golang, a titlecase function will get exported.
 func Provider() *schema.Provider {
-	var p *schema.Provider
-	p = &schema.Provider{
+	var p *schema.Provider = &schema.Provider{
 		ResourcesMap:  map[string]*schema.Resource{
 			"terratowns_home": Resource(),
 		},

@@ -26,7 +26,7 @@ This will install the gems on the system globally (unlike .nodejs which install 
 
 A ``Gemfile.lock`` will be created to lock down the gem versions used in the project.
 
-#### Executing Ruby scripts in the context of bundler
+#### Executing Ruby scripts in the context of Bundler
 
 We have to use `bundle exec` to tell future Ruby scripts to use the gems we installed. This is the way we set context.
 
@@ -40,7 +40,7 @@ You can create a web server in a single file.
 
 ## Terratowns Mock Server
 
-### Running the web server
+### Running the Web Server
 
 We can run the web server by executing the following commands:
 
@@ -55,6 +55,6 @@ All of the code for the web server is stored in the `server.rb` file.
 
 Terraform Provider resources utilize CRUD.
 
-CRUD stands for Create, Read Update, and Delete
+CRUD stands for Create, Read, Update, and Delete.
 
 https://en.wikipedia.org/wiki/Create,_read,_update_and_delete
