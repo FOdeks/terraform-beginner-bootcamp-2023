@@ -109,7 +109,7 @@ func Resource() *schema.Resource {
 			"domain_name": {
 				Type: schema.TypeString,
 				Required: true,
-				Description: "Domain name of home eg. *.cloudfront.net",
+				Description: "Domain name of home e.g. *.cloudfront.net",
 			},
 			"town": {
 				Type: schema.TypeString,
