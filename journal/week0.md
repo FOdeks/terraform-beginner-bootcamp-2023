@@ -4,6 +4,7 @@
 ![architecture_diagram_week0](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/c4faffb1-d12c-42ee-bbda-53faef918d1e)
 
 - [Semantic Versioning](#semantic-versioning)
+- [Markdown TOC Generator](#markdown-toc-generator)
 - [Install the Terraform CLI](#install-the-terraform-cli)
   * [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
   * [Considerations for Linux Distribution](#considerations-for-linux-distribution)
@@ -46,13 +47,17 @@ The general format:
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
 
+## Markdown TOC Generator
+
+TODO.....
+[GitHub Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
+
 ## Install the Terraform CLI
 
 ### Considerations with the Terraform CLI changes
 The Terraform CLI installation instructions have changed due to gpg keyring changes. So we needed to refer to the latest install CLI instructions via Terraform Documentation and change the scripting for install.
 
 [Install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) 
-
 
 ### Considerations for Linux Distribution
 
