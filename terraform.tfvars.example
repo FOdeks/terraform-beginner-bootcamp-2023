@@ -1,7 +1,7 @@
 terratowns_endpoint="https://terratowns.cloud/api"
 smoothjazz = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/smoothjazz"
-  content_version = 1 
+  content_version = 1
 }
 crabdish = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/crabdish"
