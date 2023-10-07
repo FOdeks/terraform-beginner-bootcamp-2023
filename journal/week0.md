@@ -15,10 +15,10 @@
 - [Gitpod Lifecycle](#gitpod-lifecycle)
 - [Working Environment Variables](#working-environment-variables)
   * [env command](#env-command)
-  * [Setting and Unsetting Env Vars](#setting-and-unsetting-env-vars)
-  * [Printing Vars](#printing-vars)
-  * [Scoping of Env Vars](#scoping-of-env-vars)
-  * [Persisting Env Vars in Gitpod](#persisting-env-vars-in-gitpod)
+  * [Setting and Unsetting Environment Variables](#setting-and-unsetting-environment-variables)
+  * [Printing Environment Variables](#printing-environment-variables)
+  * [Scoping of Environment Variables](#scoping-of-environment-variables)
+  * [Persisting Environment Variables in Gitpod](#persisting-environment-variables-in-gitpod)
 - [AWS CLI Installation](#aws-cli-installation)
 - [Terraform Basics](#terraform-basics)
   * [Terraform Registry](#terraform-registry)
@@ -147,7 +147,7 @@ We can list out all Environment Variables (Env Vars) using the `env` command.
 
 We can filter specific env vars using grep e.g. `env | grep AWS_`
 
-### Setting and Unsetting Env Vars
+### Setting and Unsetting Environment Variables
 
 In the terminal, we can set using `export HELLO='world'`
 
@@ -167,17 +167,17 @@ HELLO='world'
 echo $HELLO
 ```
 
-### Printing Vars
+### Printing Environment Variables
 
 We can print an env var using echo eg. `echo $HELLO`
 
-### Scoping of Env Vars
+### Scoping of Environment Variables
 
 When you open up new bash terminals in VS Code, it will not be aware of env vars that you have set in another window.
 
 If you want to env vars to persist across all future bash terminals that are open, you need to set env vars in your bash profile. e.g. `.bash_profile`
 
-### Persisting Env Vars in Gitpod
+### Persisting Environment Variables in Gitpod
 
 We can persist env vars into gitpod by storing them in Gitpod Secrets Storage.
 
@@ -292,7 +292,7 @@ This contains directory contains binaries of Terraform providers.
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
-In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We then reviewed the Random documentation and reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
+In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We reviewed the Random documentation and reset the random_string options. We added 'lower=true', 'upper=false' and 'special=false'.
 
 ## Issues with Terraform Cloud Login and Gitpod Workspace
 
