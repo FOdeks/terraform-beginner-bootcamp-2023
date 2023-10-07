@@ -13,7 +13,7 @@
     + [Execution Considerations](#execution-considerations)
     + [Linux Permissions Considerations](#linux-permissions-considerations)
 - [Gitpod Lifecycle](#gitpod-lifecycle)
-- [Working Env Vars](#working-env-vars)
+- [Working Environment Variables](#working-environment-variables)
   * [env command](#env-command)
   * [Setting and Unsetting Env Vars](#setting-and-unsetting-env-vars)
   * [Printing Vars](#printing-vars)
@@ -49,7 +49,7 @@ The general format:
 
 ## Markdown TOC Generator
 
-TODO.....
+The link below uses content developed and formatted in Markdown to generate MarkDown TOC that can be copied and pasted.
 
 [GitHub Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
 
@@ -139,7 +139,7 @@ We need to be careful when using the **Init** because it will not rerun if we re
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
-## Working Env Vars
+## Working Environment Variables
 
 ### env command
 
