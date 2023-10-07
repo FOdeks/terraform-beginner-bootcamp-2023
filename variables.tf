@@ -12,14 +12,14 @@ variable "terratowns_access_token" {
 
 variable "smoothjazz" {
   type = object({
-    public_path = string
+    public_path     = string
     content_version = number
   })
 }
 
 variable "crabdish" {
   type = object({
-    public_path = string
+    public_path     = string
     content_version = number
   })
 }
