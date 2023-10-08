@@ -9,11 +9,12 @@
 - [Terraform and Input Variables](#terraform-and-input-variables)
   * [Terraform Cloud Variables](#terraform-cloud-variables)
   * [Loading Terraform Input Variables](#loading-terraform-input-variables)
+  * [TF_VAR flag](#tf_var-flag)
   * [var flag](#var-flag)
   * [var-file flag](#var-file-flag)
   * [terraform.tfvars](#terraformtfvars)
   * [*.auto.tfvars](#autotfvars)
-  * [Order of Terraform Variables](#order-of-terraform-variables)
+  * [Order of Precedence for Terraform Variables](#order-of-precedence-for-terraform-variables)
 - [Dealing With Configuration Drift](#dealing-with-configuration-drift)
 - [What happens if we lose our State file](#what-happens-if-we-lose-our-state-file)
   * [Fix Missing Resources with Terraform Import](#fix-missing-resources-with-terraform-import)
@@ -94,6 +95,29 @@ We can set variables in Terraform Cloud to be sensitive so they are not visible 
 
 [Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
 
+### TF_VAR flag
+In Terraform, you can pass environment variables using the TF_VAR_name convention, where name is the name of your variable. Terraform will automatically recognize these environment variables and make them available as variables in your configuration. Here's a simple example:
+
+Suppose you want to pass an environment variable TF_VAR_region to set the AWS region for your Terraform configuration.
+
+Set the environment variable in your terminal session. For example, to set the region to "us-west-2" in a Unix-like shell (Linux or macOS), you can use:
+
+```sh
+export TF_VAR_region=us-west-2
+```
+Create a Terraform configuration (e.g., main.tf) that uses the var.region variable:
+
+```tf
+variable "region" {
+  description = "AWS region"
+}
+```tf
+provider "aws" {
+  region = var.region
+}
+```
+In this example, we define an environment variable named **region** and use it to set the AWS region in the AWS provider block.
+
 ### var flag
 We can use the `-var` flag to set an input variable or override a variable in the `.tfvars` file e.g.
 ```sh
@@ -116,7 +140,7 @@ dev.auto.tfvars
 staging.auto.tfvars
 prod.auto.tfvars
 ```
-In each *.auto.tfvars file, we can define variable values specific to the respective workspace.
+In each `*.auto.tfvars` file, we can define variable values specific to the respective workspace.
 
 For example, if you set your Terraform workspace to `dev`, Terraform will load `dev.auto.tfvars` and use the values from that file for your variables:
 ```sh
@@ -125,9 +149,69 @@ terraform apply
 ```
 If you switch to a different workspace, Terraform will load the corresponding `*.auto.tfvars` file for that workspace.
 
-### Order of Terraform Variables
+### Order of Precedence for Terraform Variables
 
-- TODO: document which terraform variables takes precedence.
+Terraform is declarative and aims to determine the desired state of your infrastructure. Variables are just input values that you provide to your configurations, and Terraform calculates the plan based on the values it ultimately resolves. The order of precedence is used to determine which value is assigned to a variable when multiple sources provide values for it.
+
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+
+1. Environment variables
+2. The `terraform.tfvars` file, if present.
+3. The `terraform.tfvars.json` file, if present.
+4. Any `*.auto.tfvars` or `*.auto.tfvars.json` files, processed in lexical order of their filenames.
+5. Any `-var` and `-var-file` options on the command line, in the order they are provided. (This includes variables set by a Terraform Cloud workspace.)
+
+### Tips and Best Practices
+1. Use a consistent naming convention for variables and provide descriptive variable descriptions to improve code readability.
+2. Store variable declarations in a separate `variables.tf` file.
+3. Use reasonable default values for optional variables.
+4. Consider using local variables and built-in functions to simplify your configurations and perform complex operations.
+```tf
+# Define a local variable
+locals {
+  greeting = "Hello, Terraform!"
+}
+
+# Output the local variable value
+output "output_greeting" {
+  value = local.greeting
+}
+```
+5. Use validation rules to enforce constraints on variable values.
+```tf
+variable "menu_item" {
+  type        = list(string)
+  description = "A list of the items to order from the menu"
+  validation {
+    condition     = contains(var.menu_item, "thin")
+    error_message = "You must order a 'thin' pizza crust since it's our team's favorite"
+  }
+}
+```
+
+6. Mark sensitive variables as such to prevent accidental exposure.
+```tf
+variable "credit_card" {
+  type        = map(string)
+  description = "Credit Card Info"
+  sensitive   = true
+}
+```
+You would need to update the output variable file to look like this:
+```tf
+output "credit_card" {
+  value = var.credit_card
+  description = "Credit Card Info"
+  sensitive = true
+}  
+```
+
+### Key Takeaways for Working with Terraform Variables
+1. Terraform variables are essential for managing large infrastructure configurations and maintaining consistency across environments.
+2. Variables can be assigned in various ways, including command-line flags, environment variables, and .tfvars files.
+3. Use built-in functions, locals, conditional expressions, and complex data types to create more flexible and powerful configurations.
+4. Follow best practices for naming, organizing, and securing your variables to ensure maintainable and secure infrastructure.
+
 
 ## Dealing With Configuration Drift
 
