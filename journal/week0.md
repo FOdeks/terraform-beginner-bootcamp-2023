@@ -323,7 +323,7 @@ Provide the following code (replace your token in the file):
 }
 ```
 
-We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials).
+We have automated this workaround with the following bash script [bin/terratowns/generate_tfrc_credentials](bin/terratowns/generate_tfrc_credentials).
 
 ## Simple GitHub Code Update Flow
 
