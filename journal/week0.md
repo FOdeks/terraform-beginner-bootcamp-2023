@@ -51,7 +51,7 @@ The general format:
 
 The link below uses content developed and formatted in Markdown to generate MarkDown TOC that can be copied and pasted.
 
-[GitHub Markdown TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
+[GitHub Markdown TOC Generator](https://luciopaiva.com/markdown-toc/)
 
 ## Install the Terraform CLI
 
