@@ -324,7 +324,10 @@ Provide the following code (replace your token in the file):
 ```
 
 We have automated this workaround with the following bash script [generate_tfrc_credentials](bin/generate_tfrc_credentials).
-[generate tfrc](bin.generate_tfrc_credentials)
+
+[generate tfrc](bin/generate_tfrc_credentials)
+
+[generate tfrc credentials](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/blob/main/bin/generate_tfrc_credentials)
 
 ## Simple GitHub Code Update Flow
 
