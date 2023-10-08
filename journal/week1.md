@@ -2,6 +2,41 @@
 
 ## Building Terrahouse
 
+![architecture_diagram_week1](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/a0ff68f2-c011-4d72-bb6d-f5b667f145ab)
+
+- [Fixing Tags](#fixing-tags)
+- [Root Module Structure](#root-module-structure)
+- [Terraform and Input Variables](#terraform-and-input-variables)
+  * [Terraform Cloud Variables](#terraform-cloud-variables)
+  * [Loading Terraform Input Variables](#loading-terraform-input-variables)
+  * [var flag](#var-flag)
+  * [var-file flag](#var-file-flag)
+  * [terraform.tfvars](#terraformtfvars)
+  * [*.auto.tfvars](#autotfvars)
+  * [Order of Terraform Variables](#order-of-terraform-variables)
+- [Dealing With Configuration Drift](#dealing-with-configuration-drift)
+- [What happens if we lose our State file](#what-happens-if-we-lose-our-state-file)
+  * [Fix Missing Resources with Terraform Import](#fix-missing-resources-with-terraform-import)
+  * [Fix Manual Configuration](#fix-manual-configuration)
+  * [Fix using Terraform Refresh](#fix-using-terraform-refresh)
+- [Terraform Modules](#terraform-modules)
+  * [Terraform Module Structure](#terraform-module-structure)
+  * [Passing Input Variables](#passing-input-variables)
+  * [Modules Sources](#modules-sources)
+- [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
+- [Working with Files in Terraform](#working-with-files-in-terraform)
+  * [fileexists function](#fileexists-function)
+  * [filemd5](#filemd5)
+  * [Path Variable](#path-variable)
+- [Terraform Data Sources](#terraform-data-sources)
+- [Working with JSON](#working-with-json)
+- [Changing the Lifecycle of Resources](#changing-the-lifecycle-of-resources)
+- [Terraform Data](#terraform-data)
+- [Provisioners](#provisioners)
+  * [Local-exec](#local-exec)
+  * [Remote-exec](#remote-exec)
+- [For Each Expressions](#for-each-expressions)
+
 ## Fixing Tags
 
 [How to Delete Local and Remote Tags on Git](https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/)
