@@ -96,14 +96,18 @@ Note: ChatGPT was used to generate the tree structure in ASCII format.
 
 ### Loading Terraform Input Variables
 
+In Terraform, input variables are a way to parameterize your configuration, allowing you to provide different values for your resources based on your needs or environment.
+
+You can load input variables into your Terraform configurations from various sources, such as variable files, command-line arguments, environment variables, and more. 
+
 [Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
 
 #### TF_VAR flag
-In Terraform, you can pass environment variables using the TF_VAR_name convention, where name is the name of your variable. Terraform will automatically recognize these environment variables and make them available as variables in your configuration. Here's a simple example:
+You can pass environment variables using the `TF_VAR_name` convention, where **name** is the name of your variable. Terraform will automatically recognize these environment variables and make them available as variables in your configuration. Here's a simple example:
 
-Suppose you want to pass an environment variable TF_VAR_region to set the AWS region for your Terraform configuration.
+Suppose you want to pass an environment variable ``TF_VAR_region`` to set the AWS region for your Terraform configuration.
 
-Set the environment variable in your terminal session. For example, to set the region to "us-west-2" in a Unix-like shell (Linux or macOS), you can use:
+Set the environment variable in your terminal session. For example, to set the region to **"us-west-2"** in a Unix-like shell (Linux), you can use:
 
 ```sh
 export TF_VAR_region=us-west-2
