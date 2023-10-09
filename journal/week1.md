@@ -26,7 +26,11 @@
   * [Calling a Terraform Module](#calling-a-terraform-module)
   * [Passing Input Variables](#passing-input-variables)
   * [Modules Sources](#modules-sources)
-- [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
+- [Terraform Relative Path and Terraform Absolute Path](#terraform-relative-path-and-terraform-absolute-path)
+  * [Relative Path](#relative-path)
+    + [Using Relative Path](#using-relative-path)
+  * [Absolute Path](#absolute-path)
+    + [Using Absolute Path](#using-absolute-path)
 - [Working with Files in Terraform](#working-with-files-in-terraform)
   * [fileexists function](#fileexists-function)
   * [filemd5 function](#filemd5-function)
@@ -39,6 +43,7 @@
   * [Local-exec](#local-exec)
   * [Remote-exec](#remote-exec)
 - [For Each Expressions](#for-each-expressions)
+- [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
 
 ## Fixing Tags
 
@@ -395,8 +400,9 @@ In this example, **module.ec2_instance** refers to the instantiated module, and 
 
 With this structure in place, when you run `terraform init` and `terraform apply` in the my_project directory, Terraform will use the module configuration to create the specified number of EC2 instances with the specified instance type and AMI.
 
-By using Terraform modules, you can create a more structured, maintainable, and scalable approach to managing your infrastructure code. It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you prefer.
+By using Terraform modules, you can create a more structured, maintainable, and scalable approach to managing your infrastructure code. 
 
+It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you prefer.
 
 ### Modules Sources
 
@@ -413,13 +419,8 @@ module "terrahouse_aws" {
 
 [Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
 
-## Considerations when using ChatGPT to write Terraform code
 
-LLMs such as ChatGPT may not be trained on the latest documentation or information about Terraform.
-
-It may likely produce older examples (or code) for providers that could be deprecated.
-
-## Terraform Relative Path & Terraform Absolute Path
+## Terraform Relative Path and Terraform Absolute Path
 
 When working with Terraform, you may come across **Relative Paths** and **Absolute Paths**, but it is important to note that Terraform itself doesn't distinguish between these types of paths.
 
@@ -427,8 +428,9 @@ Instead, the usage of relative or absolute paths depends on how you reference fi
 
 ### Relative Path
 
-A relative path is a path to a file or resource that is specified relative to the location of the Terraform configuration file (usually a .tf file).
-For example, if your Terraform configuration file is in a directory structure like this:
+- A relative path is a path to a file or resource that is specified relative to the location of the Terraform configuration file (usually a .tf file).
+
+- For example, if your Terraform configuration file is in a directory structure like this:
 
 ```
 my_project/
@@ -437,25 +439,35 @@ my_project/
     └── module1/
         └── child.tf
 ```
-To reference **child.tf** from within **main.tf**, you can use a relative path: `"./modules/module1/child.tf"`.
+To reference **child.tf** from within **main.tf**, you can use a relative path: `./modules/module1/child.tf`.
+
+#### Using Relative Path
+
+- This is often preferred when you want to keep your Terraform configurations flexible and portable.
+
+- Can make it easier to move your entire project to a different directory or machine without needing to update all the paths.
+
+- May be more concise when the referenced files are located nearby in the directory structure.
 
 ### Absolute Path
 
-An absolute path is a complete path that specifies the exact location of a file or resource on your filesystem.
-It typically starts from the root of the file system or a specific base directory.
-For example, an absolute path might look like: "/home/user/my_project/modules/module1/child.tf".
-In Terraform, you can use either relative paths or absolute paths when referencing files, modules, or resources within your configuration. The choice between them depends on your project's structure and your preferences. Here are some considerations:
+- An absolute path is a complete path that specifies the exact location of a file or resource on your filesystem.
 
-Relative Paths:
+- It typically starts from the root of the file system or a specific base directory.
 
-Are often preferred when you want to keep your Terraform configurations flexible and portable.
-Can make it easier to move your entire project to a different directory or machine without needing to update all the paths.
-May be more concise when the referenced files are located nearby in the directory structure.
-Absolute Paths:
+- For example, an absolute path might look like: `/home/user/my_project/modules/module1/child.tf`.
 
-Can be useful when you need to specify an exact path, especially if you're referencing files or resources outside the project's directory.
-Ensure the location of the file or resource is unambiguous and won't change regardless of where the Terraform configuration is located.
-In summary, Terraform itself doesn't define a strict difference between relative and absolute paths. Instead, it's about how you choose to specify paths when referencing files, modules, or resources within your Terraform configurations. Use the approach that suits your project's requirements and makes your configuration more maintainable and understandable.
+#### Using Absolute Path
+
+- Can be useful when you need to specify an exact path, especially if you're referencing files or resources outside the project's directory.
+
+- Ensure the location of the file or resource is unambiguous and won't change regardless of where the Terraform configuration is located.
+
+In summary, you can use either relative paths or absolute paths when referencing files, modules, or resources within your configuration. Terraform itself doesn't define a strict difference between relative and absolute paths. 
+
+Instead, it's about how you choose to specify paths when referencing files, modules, or resources within your Terraform configurations. 
+
+Use the approach that suits your project's requirements and makes your configuration more maintainable and understandable.
 
 
 ## Working with Files in Terraform
@@ -638,3 +650,9 @@ For each allows us to enumerate over complex data types e.g.
 This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive Terraform code.
 
 [For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
+
+## Considerations when using ChatGPT to write Terraform code
+
+LLMs such as ChatGPT may not be trained on the latest documentation or information about Terraform.
+
+It may likely produce older examples (or code) for providers that could be deprecated.
