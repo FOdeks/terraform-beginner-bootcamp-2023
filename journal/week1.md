@@ -23,7 +23,7 @@
   * [Fix using Terraform Refresh](#fix-using-terraform-refresh)
 - [Terraform Modules](#terraform-modules)
   * [Terraform Module Structure](#terraform-module-structure)
-  * [Calling A Terraform Module](#calling-a-terraform-module)
+  * [Calling a Terraform Module](#calling-a-terraform-module)
   * [Passing Input Variables](#passing-input-variables)
   * [Modules Sources](#modules-sources)
 - [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
@@ -304,7 +304,7 @@ my_project/
           └── variables.tf  # The module's input variable declarations
 ```
 
-### Calling A Terraform Module
+### Calling a Terraform Module
 
 To call a Terraform module in your main configuration file, you will need to use the ***module block*** and specify the source of the module along with any input variables that the module requires.
 
