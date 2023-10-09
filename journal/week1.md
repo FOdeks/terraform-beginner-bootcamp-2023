@@ -14,7 +14,7 @@
   * [var-file flag](#var-file-flag)
   * [terraform.tfvars](#terraformtfvars)
   * [*.auto.tfvars](#autotfvars)
-  * [Order of Precedence for Terraform Variables](#order-of-precedence-for-terraform-variables)
+  * [Order of Precedence](#order-of-precedence)
   * [Terraform Cloud Variables](#terraform-cloud-variables)
 - [Dealing With Configuration Drift](#dealing-with-configuration-drift)
 - [What happens if we lose our State file](#what-happens-if-we-lose-our-state-file)
@@ -148,7 +148,7 @@ terraform apply
 ```
 If you switch to a different workspace, Terraform will load the corresponding `*.auto.tfvars` file for that workspace.
 
-### Order of Precedence for Terraform Variables
+### Order of Precedence
 
 Terraform is declarative and aims to determine the desired state of your infrastructure. Variables are just input values that you provide to your configurations, and Terraform calculates the plan based on the values it ultimately resolves. The order of precedence is used to determine which value is assigned to a variable when multiple sources provide values for it.
 
@@ -419,7 +419,6 @@ module "terrahouse_aws" {
 
 [Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
 
-
 ## Terraform Relative Path and Terraform Absolute Path
 
 When working with Terraform, you may come across **Relative Paths** and **Absolute Paths**, but it is important to note that Terraform itself doesn't distinguish between these types of paths.
@@ -463,7 +462,9 @@ To reference **child.tf** from within **main.tf**, you can use a relative path: 
 
 - Ensure the location of the file or resource is unambiguous and won't change regardless of where the Terraform configuration is located.
 
-In summary, you can use either relative paths or absolute paths when referencing files, modules, or resources within your configuration. Terraform itself doesn't define a strict difference between relative and absolute paths. 
+In summary, you can use either relative paths or absolute paths when referencing files, modules, or resources within your configuration.
+
+Terraform itself doesn't define a strict difference between relative and absolute paths. 
 
 Instead, it's about how you choose to specify paths when referencing files, modules, or resources within your Terraform configurations. 
 
