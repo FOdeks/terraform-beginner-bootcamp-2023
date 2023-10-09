@@ -4,6 +4,8 @@
 
 ![architecture_diagram_week1](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/a0ff68f2-c011-4d72-bb6d-f5b667f145ab)
 
+# Table of Contents
+
 - [Fixing Tags](#fixing-tags)
 - [Root Module Structure](#root-module-structure)
 - [Terraform and Input Variables](#terraform-and-input-variables)
