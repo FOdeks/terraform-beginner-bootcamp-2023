@@ -15,7 +15,7 @@
     + [Execution Considerations](#execution-considerations)
     + [Linux Permissions Considerations](#linux-permissions-considerations)
 - [Gitpod Lifecycle](#gitpod-lifecycle)
-- [Working Environment Variables](#working-environment-variables)
+- [Working with Environment Variables](#working-with-environment-variables)
   * [env command](#env-command)
   * [Setting and Unsetting Environment Variables](#setting-and-unsetting-environment-variables)
   * [Printing Environment Variables](#printing-environment-variables)
@@ -142,7 +142,7 @@ We need to be careful when using the **Init** because it will not rerun if we re
 
 [Gitpod Tasks](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
-## Working Environment Variables
+## Working with Environment Variables
 
 ### env command
 
@@ -199,7 +199,7 @@ AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli
 
 [Getting Started Install (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-[AWS CLI Environment Variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+[Configure AWS CLI Environment Variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 
 We can check if our AWS credentials is configured correctly by running the following AWS CLI command:
 
