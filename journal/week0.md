@@ -199,7 +199,7 @@ AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli
 
 [Getting Started Install (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-[AWS CLI Env Vars](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+[AWS CLI Environment Variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 
 We can check if our AWS credentials is configured correctly by running the following AWS CLI command:
 
