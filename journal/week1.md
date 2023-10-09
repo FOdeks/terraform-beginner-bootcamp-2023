@@ -419,8 +419,46 @@ LLMs such as ChatGPT may not be trained on the latest documentation or informati
 
 It may likely produce older examples (or code) for providers that could be deprecated.
 
-## Working with Files in Terraform
+## Terraform Relative Path & Terraform Absolute Path
 
+When working with Terraform, you may come across **Relative Paths** and **Absolute Paths**, but it is important to note that Terraform itself doesn't distinguish between these types of paths.
+
+Instead, the usage of relative or absolute paths depends on how you reference files or resources in your Terraform configuration.
+
+### Relative Path
+
+A relative path is a path to a file or resource that is specified relative to the location of the Terraform configuration file (usually a .tf file).
+For example, if your Terraform configuration file is in a directory structure like this:
+
+```
+my_project/
+├── main.tf
+└── modules/
+    └── module1/
+        └── child.tf
+```
+To reference **child.tf** from within **main.tf**, you can use a relative path: `"./modules/module1/child.tf"`.
+
+### Absolute Path
+
+An absolute path is a complete path that specifies the exact location of a file or resource on your filesystem.
+It typically starts from the root of the file system or a specific base directory.
+For example, an absolute path might look like: "/home/user/my_project/modules/module1/child.tf".
+In Terraform, you can use either relative paths or absolute paths when referencing files, modules, or resources within your configuration. The choice between them depends on your project's structure and your preferences. Here are some considerations:
+
+Relative Paths:
+
+Are often preferred when you want to keep your Terraform configurations flexible and portable.
+Can make it easier to move your entire project to a different directory or machine without needing to update all the paths.
+May be more concise when the referenced files are located nearby in the directory structure.
+Absolute Paths:
+
+Can be useful when you need to specify an exact path, especially if you're referencing files or resources outside the project's directory.
+Ensure the location of the file or resource is unambiguous and won't change regardless of where the Terraform configuration is located.
+In summary, Terraform itself doesn't define a strict difference between relative and absolute paths. Instead, it's about how you choose to specify paths when referencing files, modules, or resources within your Terraform configurations. Use the approach that suits your project's requirements and makes your configuration more maintainable and understandable.
+
+
+## Working with Files in Terraform
 
 ### fileexists function
 
