@@ -39,6 +39,7 @@
 ## Semantic Versioning
 
 This project is going to utilize semantic versioning for its tagging.
+
 [semver.org](https://semver.org/)
 
 The general format:
@@ -115,7 +116,7 @@ When executing the the bash script, we can use the `./` shorthand notation to ex
 
 e.g. `./bin/install_terraform_cli`
 
-If we are using a script in .gitpod.yml, we need to point the script to a program to interpret it.
+If we are using a script in **.gitpod.yml**, we need to point the script to a program to interpret it.
 
 e.g. `source ./bin/install_terraform_cli`
 
@@ -133,13 +134,13 @@ alternatively:
 chmod 744 ./bin/install_terraform_cli
 ```
 
-https://en.wikipedia.org/wiki/Chmod
+[chmod](https://en.wikipedia.org/wiki/Chmod)
 
 ## Gitpod Lifecycle
 
 We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
 
-https://www.gitpod.io/docs/configure/workspaces/tasks
+[Gitpod Tasks](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
 ## Working Environment Variables
 
@@ -197,9 +198,11 @@ AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli
 
 
 [Getting Started Install (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
 [AWS CLI Env Vars](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 
 We can check if our AWS credentials is configured correctly by running the following AWS CLI command:
+
 ```sh
 aws sts get-caller-identity
 ```
@@ -214,7 +217,7 @@ If it is succesful you should see a json payload return that looks like this:
 }
 ```
 
-We'll need to generate AWS CLI credentials from IAM User in order to the user AWS CLI.
+We will need to generate AWS CLI credentials from IAM User in order to the user AWS CLI.
 
 ## Terraform Basics
 
@@ -290,6 +293,7 @@ This is the previous state file state.
 `.terraform`
 
 This contains directory contains binaries of Terraform providers.
+
 ### Create S3 Bucket
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
@@ -300,20 +304,20 @@ In creating the S3 Bucket, and using the random provider to generate a bucket na
 
 When attempting to run `terraform login`, it will launch in bash a wiswig view to generate a token. However, it does not work as expected in Gitpod VS Code in the browser.
 
-The workaround is manually generate a token in Terraform Cloud
+The workaround is to manually generate a token in Terraform Cloud.
 
 ```
 https://app.terraform.io/app/settings/tokens?source=terraform-login
 ```
 
-Then create and open the file manually here:
+Then, create and open the file manually here:
 
 ```sh
 touch /home/gitpod/.terraform.d/credentials.tfrc.json
 open /home/gitpod/.terraform.d/credentials.tfrc.json
 ```
 
-Provide the following code (replace your token in the file):
+Provide the following code (replace with your token in the file):
 
 ```json
 {
