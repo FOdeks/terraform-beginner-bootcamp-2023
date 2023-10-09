@@ -23,6 +23,7 @@
   * [Fix using Terraform Refresh](#fix-using-terraform-refresh)
 - [Terraform Modules](#terraform-modules)
   * [Terraform Module Structure](#terraform-module-structure)
+  * [Calling A Terraform Module](#calling-a-terraform-module)
   * [Passing Input Variables](#passing-input-variables)
   * [Modules Sources](#modules-sources)
 - [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
@@ -165,7 +166,7 @@ Terraform loads variables in the following order, with later sources taking prec
 
 3. Use reasonable default values for optional variables.
 
-4. Consider using local variables (**Terraform Locals**) and built-in functions to simplify your configurations and perform complex operations.
+4. Consider using local variables (***Terraform Locals***) and built-in functions to simplify your configurations and perform complex operations.
 
 **Locals** - is used to define local variables. It can be very useful when we need to transform data into another format and we have to reference a variable.
 
@@ -234,7 +235,7 @@ We can set two kinds of variables in **Terraform Cloud**:
 - Environment Variables - those you would set in your bash terminal eg. AWS credentials
 - Terraform Variables - those that you would normally set in your `.tfvars` file
 
-We can set variables in Terraform Cloud to be **sensitive** so they are not visible (i.e. masked) in the UI.
+We can set variables in Terraform Cloud to be ***sensitive*** so they are not visible (i.e. masked) in the UI.
 
 ## Dealing With Configuration Drift
 
@@ -251,6 +252,7 @@ terraform import aws_s3_bucket.bucket bucket_name
 ```
 
 [Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+
 [AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
 
 ### Fix Manual Configuration
@@ -266,9 +268,11 @@ terraform apply -refresh-only -auto-approve
 
 ## Terraform Modules
 
-A Terraform module is a reusable and self-contained collection of Terraform configuration files and resources that can be used to define and manage infrastructure components. It is a fundamental concept in Terraform that promotes modularity, code reusability, and maintainability in Infrastructure as Code (IaC) projects.
+A Terraform module is a reusable and self-contained collection of Terraform configuration files and resources that can be used to define and manage infrastructure components. 
 
-Here are some key characteristics and benefits of Terraform modules:
+It is a fundamental concept in Terraform that promotes modularity, code reusability, and maintainability in Infrastructure as Code (IaC) projects.
+
+Some key characteristics and benefits of Terraform modules:
 
 - **Reusability**: Modules allow you to define and package infrastructure components, making them easily reusable across different projects or environments. For example, you could create a module for provisioning a web server, and then use that module in multiple projects to consistently create web servers.
 
@@ -285,11 +289,39 @@ Here are some key characteristics and benefits of Terraform modules:
 
 ### Terraform Module Structure
 
-To create a Terraform module, you typically organize your configuration files, input variables, and resource definitions in a directory structure that follows certain conventions. Then, you can instantiate the module in your **main** Terraform configuration by specifying the module source and providing values for the module's input variables.
+To create a Terraform module, you typically organize your configuration files, input variables, and resource definitions in a directory structure that follows certain conventions. 
 
-Here's an example of how you might use a Terraform module to create an AWS EC2 instance:
+Then, you can instantiate the module in your main Terraform configuration file by specifying the module source and providing values for the module's input variables.
+
+```
+# my_project directory structure
+
+my_project/
+  ├── main.tf          # Your main configuration file
+  └── modules/
+      └── ec2/
+          ├── main.tf  # The module's configuration file
+          └── variables.tf  # The module's input variable declarations
+```
+
+### Calling A Terraform Module
+
+To call a Terraform module in your main configuration file, you will need to use the ***module block*** and specify the source of the module along with any input variables that the module requires.
+
+Using the directory structure above, here is step-by-step guide on how you can call the **ec2_instance** module in your **main.tf** file:
+
+1. Create or open your **main.tf** (the main Terraform configuration) file in the my_project directory.
+
+2. Use the module block to create the **ec2_instance** module.
+
+3. Provide the source attribute with the path to the module directory, and specify values for any input variables defined in the module.
+
+Here is an example of how you can use a Terraform module to create an AWS EC2 instance:
 
 ```tf
+# main.tf
+
+# Define the module and specify its source (the path to the module directory)
 module "ec2_instance" {
   source          = "./modules/ec2"  # Path to the module directory
   instance_count  = 2               # Input variable values for the module
@@ -297,19 +329,16 @@ module "ec2_instance" {
   ami_id          = "ami-0123456789abcdef0"
 }
 ```
-- `module` "ec2_instance" is the name you're giving to your module instance. You can choose any name you prefer.
-- `source` points to the directory containing the ec2 module. The path can be relative or absolute, depending on your project's structure.
-- `instance_count`, `instance_type`, and `ami_id` are input variables that the ec2 module expects. Make sure these variable names match the input variable names defined in the module's variables.tf file.
+
+- **module** ***"ec2_instance"*** is the name you are giving to your module instance. You can choose any name you prefer.
+- **source** points to the directory containing the ec2 module. The path can be relative or absolute, depending on your project's structure.
+- **instance_count**, **instance_type**, and **ami_id** are input variables that the ec2 module expects.
+
+Make sure these variable names match the input variable names defined in the module's **variables.tf** file.
 
 In this example, the ec2 directory contains the Terraform configuration files and logic for creating the EC2 instances, and the module is instantiated in the main configuration with specific input values.
 
-By using Terraform modules, you can create a more structured, maintainable, and scalable approach to managing your infrastructure code. It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you prefer.
-
-### Passing Input Variables
-
-We can pass input variables to our module.
-The module has to declare the Terraform variables in its own `variables.tf`.
-
+Another example:
 ```tf
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
@@ -317,6 +346,57 @@ module "terrahouse_aws" {
   bucket_name = var.bucket_name
 }
 ```
+
+### Passing Input Variables
+
+The module has to declare the Terraform variables in its own **variables.tf** file before we can pass input variables to our module.
+
+In your module's configuration (located in the modules/ec2 directory in this case), you would have a **variables.tf** file defining the input variables and a **main.tf** file defining the resources and logic to create the EC2 instances e.g.
+
+```tf
+# modules/ec2/variables.tf
+
+variable "instance_count" {
+  description = "The number of EC2 instances to create."
+}
+
+variable "instance_type" {
+  description = "The EC2 instance type."
+}
+
+variable "ami_id" {
+  description = "The ID of the Amazon Machine Image (AMI) to use for the instances."
+}
+```
+
+```tf
+# modules/ec2/main.tf
+
+resource "aws_instance" "ec2_instances" {
+  count         = var.instance_count
+  instance_type = var.instance_type
+  ami           = var.ami_id
+
+  # Other EC2 instance configuration settings can be defined here
+}
+```
+
+After defining the module, you can use the resources and outputs exposed by the module as needed. For example, if the ec2 module defines an EC2 instance resource and outputs its IP address, you can reference it like this:
+
+```tf
+# Reference the EC2 instance's public IP address
+
+output "ec2_instance_ip" {
+  value = module.ec2_instance.instance_public_ip
+}
+```
+
+In this example, **module.ec2_instance** refers to the instantiated module, and **instance_public_ip** is an output variable defined in the ec2 module.
+
+With this structure in place, when you run `terraform init` and `terraform apply` in the my_project directory, Terraform will use the module configuration to create the specified number of EC2 instances with the specified instance type and AMI.
+
+By using Terraform modules, you can create a more structured, maintainable, and scalable approach to managing your infrastructure code. It is recommended to place modules in a `modules` directory when locally developing modules but you can name it whatever you prefer.
+
 
 ### Modules Sources
 
@@ -424,7 +504,7 @@ We use the ``jsonencode`` function to create the bucket policy (in JSON) inline 
 
 ## Terraform Data
 
-Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in `replace_triggered_by`. You can use `terraform_data`'s behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
+Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they are not valid in `replace_triggered_by`. You can use `terraform_data`'s behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
 
 ```tf
 variable "revision" {
@@ -464,7 +544,7 @@ resource "aws_instance" "web" {
 }
 ```
 
-https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec
+[local-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec)
 
 ### Remote-exec
 
@@ -491,21 +571,21 @@ resource "aws_instance" "web" {
   }
 }
 ```
-https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec
+[remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
 
 The use of Terraform's `remote-exec` and `local-exec` provisioners is not recommended for several reasons:
 
-1. **Limited Idempotence:** Terraform is designed to be idempotent, meaning you can run `terraform apply` multiple times, and it should converge to the desired state without unintended changes. When you use `local-exec` or `remote-exec`, you're executing arbitrary commands on the local machine or a remote host, and these commands might not be idempotent. If the script fails or is run multiple times, it can lead to unpredictable or unwanted changes.
+- **Limited Idempotence:** Terraform is designed to be idempotent, meaning you can run `terraform apply` multiple times, and it should converge to the desired state without unintended changes. When you use `local-exec` or `remote-exec`, you're executing arbitrary commands on the local machine or a remote host, and these commands might not be idempotent. If the script fails or is run multiple times, it can lead to unpredictable or unwanted changes.
 
-2. **Security Concerns:** Running arbitrary local or remote commands as part of your infrastructure provisioning can introduce security risks. If the Terraform configuration is used in a shared environment or by multiple users, it's important to carefully review and audit any scripts that are executed. Unauthorized or malicious code could be run if not properly secured.
+- **Security Concerns:** Running arbitrary local or remote commands as part of your infrastructure provisioning can introduce security risks. If the Terraform configuration is used in a shared environment or by multiple users, it's important to carefully review and audit any scripts that are executed. Unauthorized or malicious code could be run if not properly secured.
 
-3. **Limited Portability:** Terraform is designed to be cloud-agnostic, allowing you to manage resources across various cloud providers and services. Using `local-exec` or `remote-exec` ties your infrastructure provisioning to specific local or remote environments, making it less portable and more challenging to manage in a multi-cloud or hybrid cloud setup.
+- **Limited Portability:** Terraform is designed to be cloud-agnostic, allowing you to manage resources across various cloud providers and services. Using `local-exec` or `remote-exec` ties your infrastructure provisioning to specific local or remote environments, making it less portable and more challenging to manage in a multi-cloud or hybrid cloud setup.
 
-4. **Dependency on External Tools:** `local-exec` and `remote-exec` depend on external tools and scripts to perform actions outside of Terraform. This can lead to compatibility issues, especially if the required tools or scripts change or become unavailable.
+- **Dependency on External Tools:** `local-exec` and `remote-exec` depend on external tools and scripts to perform actions outside of Terraform. This can lead to compatibility issues, especially if the required tools or scripts change or become unavailable.
 
-5. **Lack of Reusability:** Terraform modules and providers provide a structured and reusable way to define and manage infrastructure resources. Using provisioners like `local-exec` or `remote-exec` often leads to ad-hoc, one-off solutions that are less reusable and harder to maintain.
+- **Lack of Reusability:** Terraform modules and providers provide a structured and reusable way to define and manage infrastructure resources. Using provisioners like `local-exec` or `remote-exec` often leads to ad-hoc, one-off solutions that are less reusable and harder to maintain.
 
-6. **Limited Error Handling:** These provisioners have limited error handling capabilities. If a command executed via `local-exec` or `remote-exec` fails, it may not provide sufficient information or mechanisms for handling errors gracefully and recovering from failures.
+- **Limited Error Handling:** These provisioners have limited error handling capabilities. If a command executed via `local-exec` or `remote-exec` fails, it may not provide sufficient information or mechanisms for handling errors gracefully and recovering from failures.
 
 While `local-exec` and `remote-exec` can be useful for certain tasks during development or for quick-and-dirty solutions, they should generally be avoided for critical production workloads. Instead, consider using Terraform's native resource types, data sources, and providers to manage your infrastructure resources. For more complex automation and configuration management tasks, you can integrate Terraform with dedicated automation tools or use Terraform in combination with other infrastructure as code (IAC) solutions like Ansible, Puppet, or Chef, which are designed for such tasks and offer better error handling, idempotence, and security controls.
 
