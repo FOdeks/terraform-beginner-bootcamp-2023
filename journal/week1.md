@@ -26,7 +26,7 @@
   * [Calling a Terraform Module](#calling-a-terraform-module)
   * [Passing Input Variables](#passing-input-variables)
   * [Modules Sources](#modules-sources)
-- [Terraform Relative Path and Terraform Absolute Path](#terraform-relative-path-and-terraform-absolute-path)
+- [Relative Path and Absolute Path in Terraform](#relative-path-and-absolute-path-in-terraform)
   * [Relative Path](#relative-path)
     + [Using Relative Path](#using-relative-path)
   * [Absolute Path](#absolute-path)
@@ -419,7 +419,7 @@ module "terrahouse_aws" {
 
 [Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
 
-## Terraform Relative Path and Terraform Absolute Path
+## Relative Path and Absolute Path in Terraform
 
 When working with Terraform, you may come across **Relative Paths** and **Absolute Paths**, but it is important to note that Terraform itself doesn't distinguish between these types of paths.
 
