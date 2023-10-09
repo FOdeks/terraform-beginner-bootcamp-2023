@@ -75,7 +75,7 @@ CRUD stands for Create, Read, Update, and Delete.
 
 
 Provider Physical Diagram
-![provider_physical_diagram](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/6b2c3de3-0c0e-447e-8396-622ed7f243cf)
+![provider_physical_diagram](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/7fd68fef-97f0-43ad-8ad0-dbb60d21e663)
 
 
 Anatomy of a Request
