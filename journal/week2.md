@@ -72,3 +72,12 @@ Terraform Provider resources utilize CRUD.
 CRUD stands for Create, Read, Update, and Delete.
 
 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+
+
+Provider Physical Diagram
+![provider_physical_diagram](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/6b2c3de3-0c0e-447e-8396-622ed7f243cf)
+
+
+Anatomy of a Request
+![anatomy_request](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/dc0435fb-982a-449c-a28c-d53b4b21d04a)
+
