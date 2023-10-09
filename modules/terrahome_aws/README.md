@@ -9,7 +9,7 @@ module "home_payday" {
 }
 ```
 
-THe public directory expects the following:
+The public directory expects the following:
 - index.html
 - error.html
 - assets
