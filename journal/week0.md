@@ -333,5 +333,21 @@ We have automated this workaround with the following bash script [generate tfrc 
 
 ## Simple GitHub Code Update Flow
 
+- **Issue Creation:** Begin by creating new issues. Provide a clear title, add comments, assign labels, and submit the issue.
+
+- **Branch Management:** Create a new branch (from the issue), perform a `git fetch`, and switch to the branch in you local repository.
+
+- **Action on open Issues:** Address open issues as required, making necessary changes or updates.
+
+- **Commit with Caution:** Before committing changes, ensure that there is no sensitive data in the filed being committed. Keep the commits clean and concise.
+
+- **Commit and Sync:** Commit the changes and sync them witjh the relevant issue number and name (e.g. '#1 add semantic versioning documentation to project').
+
+- **Pull Request Creation:** Create a `Pull Request`, `Squash and Merge`, and `confirm`.
+
+- **Maintain Main Branch:** Switch back to the Main branch, pull the latest changes, tag the work e.g. `git tag 1.0.0`, and push the tags `git push --tags` to the main repository.
+
+- **Review Tag Changes:** Refresh the Git Graph to view the updated tags and changes.    
+
 ![github_flow](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/3fae048d-4892-4391-989a-661eaebe1f9d)
 
