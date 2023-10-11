@@ -36,7 +36,7 @@
 - [Terraform Cloud](#terraform-cloud)
   * [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
   * [Key Features and Functions of Terraform Cloud](#key-features-and-functions-of-terraform-cloud)
-  * [Migrating Terraform State File from Local Environment to Terraform Cloud](#migrating-terraform-state-file-from-local-environment-to-terraform-cloud)
+  * [Migrating Terraform State File from Local Environment](#migrating-terraform-state-file-from-local-environment)
 - [Simple GitHub Code Update Flow](#simple-github-code-update-flow)
 
 ## Semantic Versioning
@@ -332,7 +332,7 @@ Terraform Cloud is a valuable tool for organizations and teams looking to stream
 
 9. **Tiers:**  Terraform Cloud is available in both free and paid tiers, with the paid tiers offering additional features such as more extensive collaboration capabilities, access control, and other enterprise-level features. 
 
-### Migrating Terraform State File from Local to Terraform Cloud
+### Migrating Terraform State File from Local Environment
 
 To migrate your `terraform.tfstate` from your local environment to Terraform Cloud, you need to configure remote state management using Terraform Cloud.
 
