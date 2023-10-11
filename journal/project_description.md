@@ -9,6 +9,7 @@ Terraformers will write the Infrastructure as Code (IaC) to launch their Terra H
 Terraformers need to choose a **theme or topic of interest** and build their page around existing community hubs. 
 
 Are you a Taylor Swift fan? Create a fan page in Melomaniac Mansion
+
 Are you big into BBQ? Create a Brisket guide in the Cooker Cove
 
 
