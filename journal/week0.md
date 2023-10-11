@@ -343,6 +343,8 @@ Here are the steps:
    In your existing Terraform configuration, you will need to configure a backend that points to Terraform Cloud:
 
 ```tf
+# Replace "your-organization-name" with the name of your Terraform Cloud organization and "your-workspace-name" with the name of the workspace in Terraform Cloud where you want to store the state.
+
 terraform {
   cloud {
     organization = "your-organization-name"
@@ -352,8 +354,6 @@ terraform {
   }
 }
 ```
-
-   Replace "your-organization-name" with the name of your Terraform Cloud organization and "your-workspace-name" with the name of the workspace in Terraform Cloud where you want to store the state.
 
 2. **Initialize and Apply:**
    Once you have updated your Terraform configuration with the backend configuration, you need to initialize Terraform by running `terraform init` in order to apply the change.
