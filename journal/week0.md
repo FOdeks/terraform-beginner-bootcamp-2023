@@ -343,7 +343,8 @@ Here are the steps:
    In your existing Terraform configuration, you will need to configure a backend that points to Terraform Cloud:
 
 ```tf
-# Replace "your-organization-name" with the name of your Terraform Cloud organization and "your-workspace-name" with the name of the workspace in Terraform Cloud where you want to store the state.
+# Replace "your-organization-name" with the name of your Terraform Cloud organization and "your-workspace-name" with
+# the name of the workspace in Terraform Cloud where you want to store the state.
 
 terraform {
   cloud {
@@ -356,12 +357,15 @@ terraform {
 ```
 
 2. **Initialize and Apply:**
+
    Once you have updated your Terraform configuration with the backend configuration, you need to initialize Terraform by running `terraform init` in order to apply the change.
  
 3. **Confirm State Migration:**
+
    During the execution of the command, Terraform will prompt you to confirm the state migration. Ensure you confirm the migration to Terraform Cloud. This action will copy your local `terraform.tfstate` to the remote state storage in Terraform Cloud.
 
 4. **Verify State in Terraform Cloud:**
+
    After confirming the state migration, you can verify that the state is now stored in Terraform Cloud by checking the workspace in the Terraform Cloud web interface.
 
 Make sure you have the necessary Terraform Cloud credentials and permissions to write to the remote state. Also, you will need to log in to Terraform Cloud using the `terraform login` command before running `terraform init`. This command allows you to authenticate and set the necessary API token for communication with Terraform Cloud.
@@ -395,7 +399,9 @@ Provide the following code (replace with your token in the file):
 }
 ```
 
-We have automated this workaround with the following bash script [generate tfrc credentials](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/blob/main/bin/generate_tfrc_credentials).
+We have automated this workaround with the following bash script:
+
+[generate tfrc credentials](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/blob/main/bin/generate_tfrc_credentials).
 
 ## Simple GitHub Code Update Flow
 
