@@ -8,7 +8,3 @@
 - [Week 1 Journal - Building Terrahouse](journal/week1.md)
 - [Week 2 Journal - Deploying To TerraTowns](journal/week2.md) 
 
-## Gitpod
-
-### Using Gitpod
-[Gitpod Tasks](https://www.gitpod.io/docs/configure/workspaces/tasks)
