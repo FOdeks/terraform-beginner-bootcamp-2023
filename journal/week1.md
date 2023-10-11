@@ -1,23 +1,17 @@
 # Terraform Beginner Bootcamp 2023 - Week 1
 ## Building Terrahome
 
-A module named **Terrahome AWS**, was developed for the TerraTowns. This module included two nested modules:
+A module named **Terrahome AWS**, will be developed for the TerraTowns. This module will include two nested modules:
 
-- **Storage** - `resource-storage.tf` 
+- **Storage** - `./modules/resource-storage.tf`
+  - AWS Caller Identity
+  - Static Website Hosting
+  - S3 Bucket
+  - Bucket Policy
 
-  AWS Caller Identity
-
-  Static Website Hosting
-
-  S3 Bucket
-
-  Bucket Policy
-
-- **Content Delivery Network** - `resource-cdn.tf`
-
-  Origin Access Controls
-
-  CloudFront Distribution (incorporated a code to invalidate Cache)
+- **Content Delivery Network** - `./modules/resource-cdn.tf`
+  - Origin Access Controls
+  - CloudFront Distribution (incorporated a code to invalidate Cache)
 
 ![architecture_diagram_week1](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/a0ff68f2-c011-4d72-bb6d-f5b667f145ab)
 
