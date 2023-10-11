@@ -7,6 +7,6 @@
 ## Journals
 - [Project Description](journal/project_description.md)
 - [Week 0 - Project Preparation](journal/week0.md)
-- [Week 1 - Building Terrahouse](journal/week1.md)
+- [Week 1 - Building Terrahome](journal/week1.md)
 - [Week 2 - Deploying To TerraTowns](journal/week2.md) 
 
