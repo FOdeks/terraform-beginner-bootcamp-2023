@@ -55,7 +55,7 @@ The general format:
 
 ## Markdown TOC Generator
 
-The link below uses content developed and formatted in Markdown to generate MarkDown TOC that can be copied and pasted.
+The link below uses documentation developed and formatted in Markdown to generate MarkDown Table of Contents that can be copied and pasted.
 
 [GitHub Markdown TOC Generator](https://luciopaiva.com/markdown-toc/)
 
@@ -69,11 +69,10 @@ The Terraform CLI installation instructions have changed due to gpg keyring chan
 ### Considerations for Linux Distribution
 
 This project is built against Ubuntu.
-Please consider checking your Linux Distribution and change accordingly to your needs.
 
-[How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
+Consider checking your Linux Distribution and change accordingly to your needs.
 
-Example of checking OS version
+Example of checking OS version:
 
 ```
 $ cat /etc/os-release
@@ -91,6 +90,7 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=jammy
 ```
+[How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
 
 ### Refactoring into Bash Scripts
 
