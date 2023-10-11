@@ -1,7 +1,8 @@
 # Terraform Beginner Bootcamp 2023
 
-![architecture_diagram](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/47523243-9765-450a-aa1a-a710b5ee914a)
 
+
+![terraform_logo](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/db5aaa0e-e554-494a-bbdd-04a59cc01294)
 
 ## Weekly Journals
 - [Week 0 Journal - Project Preparation](journal/week0.md)
