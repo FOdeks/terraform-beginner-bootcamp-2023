@@ -7,6 +7,8 @@
 
 - [Semantic Versioning](#semantic-versioning)
 - [Markdown TOC Generator](#markdown-toc-generator)
+- [Cloud-Based Development Environment](#cloud-based-development-environment)
+  * [Gitpod Lifecycle](#gitpod-lifecycle)
 - [Install the Terraform CLI](#install-the-terraform-cli)
   * [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
   * [Considerations for Linux Distribution](#considerations-for-linux-distribution)
@@ -14,7 +16,6 @@
     + [Shebang Considerations](#shebang-considerations)
     + [Execution Considerations](#execution-considerations)
     + [Linux Permissions Considerations](#linux-permissions-considerations)
-- [Gitpod Lifecycle](#gitpod-lifecycle)
 - [Working with Environment Variables](#working-with-environment-variables)
   * [env command](#env-command)
   * [Setting and Unsetting Environment Variables](#setting-and-unsetting-environment-variables)
@@ -58,6 +59,38 @@ The general format:
 The link below uses documentation developed and formatted in Markdown to generate MarkDown Table of Contents that can be copied and pasted.
 
 [GitHub Markdown TOC Generator](https://luciopaiva.com/markdown-toc/)
+
+## Cloud-Based Development Environment
+[Gitpod](https://www.gitpod.io/docs/introduction/getting-started) offers a cloud-based, ready-to-code development environment that can be accessed from a web browser.
+
+It is an online integrated development environment (IDE) often used by developers to improve productivity and collaboration when working on software projects, especially those hosted on Git repositories like GitHub.
+
+It is designed to streamline the process of setting up, configuring, and sharing development environments, and helps ensure consistency across team members, particularly for projects that use Git for version control. 
+
+**Key Features:**
+
+- **Cloud-Based Development Environment:** Gitpod provides a fully functional development environment in the cloud. This means you can access your development workspace from anywhere with an internet connection, and you're not tied to a specific machine or operating system.
+
+- **Git Integration:** Gitpod is tightly integrated with Git and GitHub. You can start a Gitpod environment directly from a GitHub repository by installing a [browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension), thereby making it easier to work on open-source projects or collaborate with others.
+
+- **Preconfigured Development Environments:** Gitpod allows you to define the development environment you need using a configuration file (typically a `.gitpod.yml` file). This file can specify the software, dependencies, and tools required for your project, and Gitpod will set up the environment automatically when you open your workspace.
+
+- **Collaboration:** Multiple developers can collaborate in real-time on a Gitpod workspace, making it useful for pair programming or code reviews.
+
+- **VS Code Integration:** Gitpod is built on the Visual Studio Code (VS Code) editor, which is a popular and feature-rich code editor. This means you get many of the features of VS Code, such as extensions and customizations, within Gitpod.
+
+- **Scalability:** Gitpod is scalable, meaning you can configure it for large projects with multiple contributors or for smaller personal projects.
+
+- **Automated Maintenance:** Gitpod takes care of routine tasks like updates, security patches, and environment maintenance, allowing developers to focus on writing code.
+
+- **Pricing:** Gitpod offers both free and paid plans, with the free plan typically having some limitations on resources and usage.
+
+
+### Gitpod Lifecycle
+
+We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
+
+[Gitpod Tasks](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
 ## Install the Terraform CLI
 
@@ -141,12 +174,6 @@ chmod 744 ./bin/install_terraform_cli
 ```
 
 [chmod](https://en.wikipedia.org/wiki/Chmod)
-
-## Gitpod Lifecycle
-
-We need to be careful when using the **Init** because it will not rerun if we restart an existing workspace.
-
-[Gitpod Tasks](https://www.gitpod.io/docs/configure/workspaces/tasks)
 
 ## Working with Environment Variables
 
