@@ -114,7 +114,7 @@ ChatGPT recommended this format for bash: `#!/usr/bin/env bash`
 
 - will search the user's path for the bash executable
 
-https://en.wikipedia.org/wiki/Shebang_(Unix)
+[shebang](https://en.wikipedia.org/wiki/Shebang_(Unix))
 
 #### Execution Considerations
 
