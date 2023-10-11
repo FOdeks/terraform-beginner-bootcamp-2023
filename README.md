@@ -10,3 +10,7 @@
 - [Week 1 - Building Terrahome](journal/week1.md)
 - [Week 2 - Deploying To TerraTowns](journal/week2.md) 
 
+
+___
+#### Instructor
+Andrew Brown, [ExamPro](https://www.exampro.co/ter-cpb-001)
