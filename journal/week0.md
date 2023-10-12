@@ -42,8 +42,9 @@ ___
 - [AWS CLI Installation](#aws-cli-installation)
 - [Terraform Basics](#terraform-basics)
   * [Terraform Registry](#terraform-registry)
-  * [Terraform Console](#terraform-console)
+  * [Terraform Workflow](#terraform-workflow)
     + [Terraform Init](#terraform-init)
+    + [Terraform Validate](#terraform-validate)
     + [Terraform Plan](#terraform-plan)
     + [Terraform Apply](#terraform-apply)
     + [Terraform Destroy](#terraform-destroy)
@@ -354,19 +355,81 @@ We will need to generate AWS CLI credentials from IAM User in order to the user 
 
 Terraform sources their providers and modules from the Terraform Registry which is located at [registry.terraform.io](https://registry.terraform.io/)
 
-- **Providers** is an interface to APIs that will allow for creating resources in terraform, e.g. [Terraform Provider - random](https://registry.terraform.io/providers/hashicorp/random).
-- **Modules** are a way to make large amount of terraform code modular, portable and sharable.
+- **Providers** is an interface to APIs that will allow for creating resources in terraform, e.g. [hashicorp/random](https://registry.terraform.io/providers/hashicorp/random).
 
+  The **random** provider is declared in the **main** Terraform configuration file as follows:
 
-### Terraform Console
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
 
-We can see a list of all the Terraform commands by simply typing `terraform`.
+provider "random" {
+  # Configuration options
+}
+```
+
+- **Modules** are a way to make large amount of Terraform code modular, portable and sharable.
+
+> **Note:** The `main.tf` configuration file is considered the top root module in Terraform. Modules are built within the root module. 
+
+### Terraform Workflow
+
+A list of all the Terraform commands will be displayed by simply typing `terraform` in the command prompt.
+
+```bash
+$ terraform
+Usage: terraform [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+**Main commands:**
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  metadata      Metadata related commands
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Execute integration tests for Terraform modules
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+```
 
 #### Terraform Init
 
 `terraform init`
 
-This command is run at the start of a new Terraform project in order to download the binaries for the Terraform providers that we will use in this project.
+This command is run at the start of a new Terraform project in order to download the binaries for the Terraform providers that will be used in the project.
 
 #### Terraform Plan
 
@@ -396,7 +459,7 @@ You can also use the **auto approve** flag to skip the approve prompt, e.g. `ter
 
 `.terraform.lock.hcl` 
 
-This contains the locked versioning for the providers or modulues that should be used with this project.
+This file is created after executing the `terraform init` command. It contains the locked versioning for the providers or modulues that should be used with this project.
 
 The Terraform Lock File **should be committed** to your Version Control System (VCS) e.g. Github
 
@@ -418,7 +481,7 @@ This is the backup of the previous state file state.
 
 `.terraform`
 
-This contains directory contains binaries of Terraform providers.
+This folder is created after executing the `terraform init` command. The directory contains the binaries of Terraform providers.
 
 ### Create S3 Bucket
 #### Note: S3 Bucket Creation
