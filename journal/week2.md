@@ -9,7 +9,7 @@ ___
 
 ![architecture_diagram_week2](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/f4d09ca2-d091-41f6-92ae-0c4d0f1569c1)
 
-# Table of Contents
+## Table of Contents
 
 - [Working with Ruby](#working-with-ruby)
   - [Bundler](#bundler)
