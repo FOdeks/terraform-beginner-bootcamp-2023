@@ -1,8 +1,24 @@
-# Terraform Beginner Bootcamp 2023 - Week 0
+# Terraform Beginner Bootcamp 2023
+## Week 0 - Getting Prepped!
+- Creating a Discord Account and Verifying Email
+- How to ask a good question to get help in the Discord
+- How to take screenshots from the desktop
+- How to write Github flavored Markdown
+- How to add and edit files only using Github for documentation
+- How to format images and include them in documentation in Github
+- How to perform basic Git actions (pull, merge, push)
+- How to submit your homework in the Student Portal
+- How to write a good Summary for a weekly submission
+- Copying the template Project Repo
+- Configure AWS Provider in the Terraform code
+- Configure remote state for Terraform Cloud
+- Use the Random Terraform Provider
+- Plan and Apply and Delete Example
+___
 
 ![architecture_diagram_week0](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/c4faffb1-d12c-42ee-bbda-53faef918d1e)
 
-# Table of Contents
+## Table of Contents
 
 - [Semantic Versioning](#semantic-versioning)
 - [Markdown TOC Generator](#markdown-toc-generator)
