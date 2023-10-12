@@ -1,6 +1,5 @@
 # Terraform Beginner Bootcamp 2023
 ## Week 1 - Getting Comfortable with Terraform and Terraform Cloud
-- Navigating Terraform Registry
 - Providers vs Modules
 - Using a Module (Inputs and Outputs)
 - Format, Validate, Console
@@ -69,6 +68,9 @@ A module named **Terrahome AWS**, will be developed for the TerraTowns. This mod
   * [Local-exec](#local-exec)
   * [Remote-exec](#remote-exec)
 - [For Each Expressions](#for-each-expressions)
+- [Terraform Format](#terraform-format)
+- [Terraform Validate](#terraform-validate)
+- [Terraform Console](#terraform-console)
 - [Considerations when using ChatGPT to write Terraform code](#considerations-when-using-chatgpt-to-write-terraform-code)
 
 
@@ -681,15 +683,108 @@ While `local-exec` and `remote-exec` can be useful for certain tasks during deve
 
 ## For Each Expressions
 
-For each allows us to enumerate over complex data types e.g.
+Using the `for_each` meta-argument in Terraform allows you to create multiple instances of a resource based on a map or a set of strings. Here's a simple example that uses `for_each` to create multiple AWS S3 buckets:
 
-```sh
-[for s in var.list : upper(s)]
+```hcl
+variable "bucket_names" {
+  type    = set(string)
+  default = ["bucket1", "bucket2", "bucket3"]
+}
+
+resource "aws_s3_bucket" "example" {
+  for_each = var.bucket_names
+
+  bucket = each.key
+  acl    = "private"
+}
 ```
+In this code, we have defined a variable `bucket_names` that is a set of strings, and it has three default bucket names. The `for_each` argument in the `aws_s3_bucket` resource block is set to iterate over the elements of `var.bucket_names`.
+
+As a result, Terraform will create three separate S3 buckets with the names **bucket1**, **bucket2**, and **bucket3**, each with the ACL set to **private**. You can modify the `var.bucket_names` variable to add or remove bucket names, and Terraform will create or destroy the corresponding S3 buckets accordingly.
 
 This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive Terraform code.
 
 [For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
+
+## Terraform Format
+
+**Terraform Format** is a built-in Terraform command that is used to automatically format Terraform configuration files. It helps maintain consistent and readable code by standardizing the style and layout of your configuration files.
+
+This command formats your Terraform files by aligning spaces on both sides of **'='** in a block and makes it easy to read.
+
+Run the following command to format all the configuration files in that directory:
+
+```bash
+terraform fmt
+```
+This command will automatically format the files in place, making them adhere to the recommended style and layout guidelines. You can use it as a part of your development workflow to ensure that your Terraform code remains consistent and easy to read
+
+```bash
+terraform fmt -recursive
+```
+Using the **recursive** flag just means it will also format any Terraform files that are in subdirectories of the current working directory.
+
+## Terraform Validate
+
+**Terraform Validate** is a built-in Terraform command that is used to check the syntax and validate the configuration files in a Terraform project without actually creating or modifying any infrastructure resources. It helps you identify and rectify errors in your Terraform configurations before you apply them, reducing the risk of mistakes that could lead to issues in your infrastructure.
+
+When you run `terraform validate`, Terraform performs the following checks:
+
+- **Syntax Validation:** It checks the HCL (HashiCorp Configuration Language) syntax of your Terraform configuration files for correctness. If there are syntax errors in your configuration files, Terraform will report them, allowing you to correct them.
+
+- **Configuration Validation:** It checks whether your configurations are correctly structured and adhere to the required format. For example, it checks that all resources are defined correctly and that variable and module references are valid.
+
+```bash
+terraform validate
+```
+If your configuration files are free of syntax errors and conform to Terraform's expected structure, you will see no output, indicating a successful validation. However, if there are issues with your configurations, Terraform will report error messages, and you can use these messages to identify and fix the problems in your code.
+
+**Note:** Validating your Terraform configurations is a good practice as it can catch errors early in the development process, helping you avoid issues when you apply the configuration to create or modify infrastructure resources.
+
+## Terraform Console
+
+**Terraform Console** is an interactive command-line tool provided by Terraform that allows you to evaluate and experiment with Terraform expressions and functions in an interactive environment. 
+
+It is a helpful way to test and validate various expressions and functions before incorporating them into your Terraform configurations.
+
+Run the following command to start an interactive console:
+
+```bash
+terraform console
+```
+After running this command, you'll enter an interactive shell where you can enter and evaluate Terraform expressions.
+
+For example, you can use the terraform console to do the following:
+
+- Evaluate mathematical expressions:
+```hcl
+> 5 + 3
+8
+```
+
+- Work with Terraform functions:
+```hcl
+> element(["apple", "banana", "cherry"], 1)
+"banana"
+```
+
+- Reference variables and data sources:
+```hcl
+> var.my_variable
+"some_value"
+```
+
+- Test conditional expressions:
+```hcl
+> true ? "yes" : "no"
+"yes"
+```
+
+- Experiment with built-in Terraform functions and operators.
+
+  This interactive console is particularly useful for experimenting with Terraform expressions, debugging, and ensuring that your expressions work as expected. It can help you understand how different Terraform         functions and operations behave and aid in building more complex configurations.
+
+To exit the terraform console, simply type `exit` to return to the regular command prompt.
 
 ## Considerations when using ChatGPT to write Terraform code
 
