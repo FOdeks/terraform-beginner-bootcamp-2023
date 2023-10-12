@@ -340,10 +340,9 @@ We will need to generate AWS CLI credentials from IAM User in order to the user 
 
 Terraform sources their providers and modules from the Terraform Registry which is located at [registry.terraform.io](https://registry.terraform.io/)
 
-- **Providers** is an interface to APIs that will allow for creating resources in terraform.
+- **Providers** is an interface to APIs that will allow for creating resources in terraform, e.g. [Terraform Provider - random](https://registry.terraform.io/providers/hashicorp/random).
 - **Modules** are a way to make large amount of terraform code modular, portable and sharable.
 
-[Random Terraform Provider](https://registry.terraform.io/providers/hashicorp/random)
 
 ### Terraform Console
 
