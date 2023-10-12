@@ -19,8 +19,8 @@ ___
 ![architecture_diagram_week0](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/c4faffb1-d12c-42ee-bbda-53faef918d1e)
 
 ## Table of Contents
-
 - [Semantic Versioning](#semantic-versioning)
+- [Markdown Language](#markdown-language)
 - [Markdown TOC Generator](#markdown-toc-generator)
 - [Cloud-Based Development Environment](#cloud-based-development-environment)
   * [Gitpod Lifecycle](#gitpod-lifecycle)
@@ -68,6 +68,74 @@ The general format:
 - **MAJOR** version when you make incompatible API changes
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
+
+## Markdown Language
+
+Markdown is a lightweight markup language that is widely used for formatting plain text documents that could be converted into HTML. Markdown is often used for writing documentation, README files in software projects, forum posts, and more, especially on platforms like GitHub and Stack Overflow.
+
+Markdown is designed to be both human-readable in its raw form, and easy to write, without the complexities of writing raw HTML or other markup languages. 
+
+It uses a simple and intuitive system of symbols and formatting rules to define how text should be styled and structured. 
+
+**Common elements in Markdown:**
+
+- **Headers:** You can create headers by using one or more hash symbols (#) at the beginning of a line. More hash symbols indicate lower-level headers.
+
+```sh
+# Header 1
+## Header 2
+### Header 3
+```
+
+- **Text Styling:** You can apply formatting to text, such as making text bold, italic, or strikethrough using asterisks or underscores.
+
+```md
+*italic* or _italic_
+**bold** or __bold__
+~~strikethrough~~
+```
+
+- **Lists:** You can create ordered (numbered) and unordered (bulleted) lists.
+
+```md
+1. Item 1
+2. Item 2
+
+- Bullet 1
+- Bullet 2
+```
+
+- **Links:** You can create links to other web pages or resources.
+
+```less
+[Google](https://www.google.com)
+```
+
+- Images: You can embed images in your document.
+
+```mathematica
+![Image Alt Text](image-url)
+```
+
+- **Code:** You can format inline code or code blocks using backticks or triple backticks.
+
+```arduino
+`inline code`
+
+#```
+
+code block
+
+#```
+```
+
+- **Quotes:** You can create blockquotes by using the greater-than symbol (>) at the beginning of a line.
+
+```css
+> This is a blockquote.
+```
+
+[Markdown Guide](https://www.markdownguide.org/) 
 
 ## Markdown TOC Generator
 
