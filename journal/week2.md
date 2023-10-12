@@ -1,8 +1,9 @@
 # Terraform Beginner Bootcamp 2023
 ## Week 2 - Launching and Connection Terrahome to TerraTowns
 ### Programming Languages
-- Ruby for Web Server
-- Go for Terraform Provider
+- **Ruby** used for web development
+- **Sinatra** is a Domain-Specific Language for quickly creating web applications in Ruby
+- **Go** used to develop the custom Terraform Provider
 ___
 
 ## Deploying To TerraTowns
