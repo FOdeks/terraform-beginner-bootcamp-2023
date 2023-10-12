@@ -1,4 +1,9 @@
-# Terraform Beginner Bootcamp 2023 - Week 2
+# Terraform Beginner Bootcamp 2023
+## Week 2 - Launching and Connection Terrahome to TerraTowns
+### Programming Languages
+- Ruby
+- Go
+
 ## Deploying To TerraTowns
 
 ![architecture_diagram_week2](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/f4d09ca2-d091-41f6-92ae-0c4d0f1569c1)
