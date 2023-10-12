@@ -21,6 +21,7 @@ ___
 ## Table of Contents
 - [Semantic Versioning](#semantic-versioning)
 - [Markdown Language](#markdown-language)
+  * [Common elements in Markdown](#common-elements-in-markdown)
 - [Markdown TOC Generator](#markdown-toc-generator)
 - [Cloud-Based Development Environment](#cloud-based-development-environment)
   * [Gitpod Lifecycle](#gitpod-lifecycle)
@@ -77,7 +78,7 @@ Markdown is designed to be both human-readable in its raw form, and easy to writ
 
 It uses a simple and intuitive system of symbols and formatting rules to define how text should be styled and structured. 
 
-**Common elements in Markdown:**
+### Common elements in Markdown
 
 - **Headers:** You can create headers by using one or more hash symbols (#) at the beginning of a line. More hash symbols indicate lower-level headers.
 
