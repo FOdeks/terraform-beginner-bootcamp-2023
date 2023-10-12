@@ -1,5 +1,6 @@
 # Terraform Beginner Bootcamp 2023
-## Week 2 - Launching and Connection Terrahome to TerraTowns
+## Week 2 - Launching and Connecting Terrahome to TerraTowns
+
 ### Programming Languages
 - **Ruby** used for web development
 - **Sinatra** is a Domain-Specific Language for quickly creating web applications in Ruby
