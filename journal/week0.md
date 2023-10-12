@@ -10,6 +10,7 @@
 - How to submit your homework in the Student Portal
 - How to write a good Summary for a weekly submission
 - Copying the template Project Repo
+- Navigating Terraform Registry
 - Configure AWS Provider in the Terraform code
 - Configure Remote State for Terraform Cloud
 - Use the Random Terraform Provider
