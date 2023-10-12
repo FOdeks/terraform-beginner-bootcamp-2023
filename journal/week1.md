@@ -1,4 +1,15 @@
-# Terraform Beginner Bootcamp 2023 - Week 1
+# Terraform Beginner Bootcamp 2023
+## Week 1 - Getting Comfortable with Terraform and Terraform Cloud
+- Navigating Terraform Registry
+- Providers vs Modules
+- Using a Module (Inputs and Outputs)
+- Format, Validate, Console
+- Variables
+- Outputs
+- Resource
+- Data
+___
+
 ## Building Terrahome
 
 A module named **Terrahome AWS**, will be developed for the TerraTowns. This module will include two nested modules:
