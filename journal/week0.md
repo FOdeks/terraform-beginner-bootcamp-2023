@@ -38,7 +38,7 @@ ___
   * [Setting and Unsetting Environment Variables](#setting-and-unsetting-environment-variables)
   * [Printing Environment Variables](#printing-environment-variables)
   * [Scoping of Environment Variables](#scoping-of-environment-variables)
-  * [Persisting Environment Variables in Gitpod](#persisting-environment-variables-in-gitpod)
+  * [Make Environment Variables Persist in Gitpod](#make-environment-variables-persist-in-gitpod)
 - [AWS CLI Installation](#aws-cli-installation)
 - [Terraform Basics](#terraform-basics)
   * [Terraform Registry](#terraform-registry)
@@ -55,11 +55,11 @@ ___
   * [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
   * [Key Features and Functions of Terraform Cloud](#key-features-and-functions-of-terraform-cloud)
   * [Migrating Terraform State File from Local Environment](#migrating-terraform-state-file-from-local-environment)
-- [Simple GitHub Code Update Flow](#simple-github-code-update-flow)
+- [GitHub Code Update Flow](#github-code-update-flow)
 
 ## Semantic Versioning
 
-This project is going to utilize semantic versioning for its tagging.
+This project is going to utilize Semantic Versioning for its tagging.
 
 [semver.org](https://semver.org/)
 
@@ -186,13 +186,17 @@ The Terraform CLI installation instructions have changed due to gpg keyring chan
 
 This project is built against Ubuntu.
 
-Consider checking your Linux Distribution and change accordingly to your needs.
+Consider checking your Linux Distribution version and make changes accordingly to your needs.
 
-Example of checking OS version:
+Run this command to check OS version:
 
 ```
 $ cat /etc/os-release
+```
 
+To dispay an output smiliar to this:
+
+```
 PRETTY_NAME="Ubuntu 22.04.3 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
@@ -262,21 +266,21 @@ chmod 744 ./bin/install_terraform_cli
 
 ### env command
 
-We can list out all Environment Variables (Env Vars) using the `env` command.
+List out all environment variables using the `env` command.
 
-We can filter specific env vars using grep e.g. `env | grep AWS_`
+Filter for specific environmnent variables using **grep** e.g. `env | grep AWS_`
 
 ### Setting and Unsetting Environment Variables
 
-In the terminal, we can set using `export HELLO='world'`
+Set using environmnent variables `export HELLO='world'`
 
-In the terminal, we can unset using `unset HELLO`
+Unset environmnent variables using `unset HELLO`
 
 ```sh
 HELLO='world' .bin/print_message
 ```
 
-Within a bash script we can set env without writing export e.g.
+Within a bash script we can set environmnent variables without writing export e.g.
 
 ```sh
 #!/usr/bin/env bash
@@ -288,25 +292,34 @@ echo $HELLO
 
 ### Printing Environment Variables
 
-We can print an env var using echo eg. `echo $HELLO`
+Print an environmnent variable using **echo** e.g.
+
+```
+echo $HELLO`
+```
 
 ### Scoping of Environment Variables
 
 When you open up new bash terminals in VS Code, it will not be aware of env vars that you have set in another window.
 
-If you want to env vars to persist across all future bash terminals that are open, you need to set env vars in your bash profile. e.g. `.bash_profile`
+If you want to environment variables to persist across all future bash terminals that are open, you need to set env vars in your bash profile. e.g. `.bash_profile`
 
-### Persisting Environment Variables in Gitpod
+### Make Environment Variables Persist in Gitpod
 
-We can persist env vars into gitpod by storing them in Gitpod Secrets Storage.
+To make environment variables persist in your Gitpod environment, use the `gp env` command:
 
-```
+```bash
 gp env HELLO='world'
+
+# Storing AWS Credentials
+gp env AWS_ACCESS_KEY_ID=your_access_key_here
+gp env AWS_SECRET_ACCESS_KEY=your_secret_key_here
+gp env AWS_DEFAULT_REGION=your_region_here
 ```
 
 All future workspaces launched will set the env vars for all bash terminals opened in those workspaces.
 
-You can also set env vars in the `.gitpod.yml` but this can only contain non-senstive env vars.
+You can also set environmnent variables in the `.gitpod.yml` but this can only contain non-senstive environmnent variables.
 
 ## AWS CLI Installation
 
@@ -485,7 +498,7 @@ When attempting to run `terraform login` in **bash**, it launched a **wiswig* vi
 
 The workaround is to manually generate a token in Terraform Cloud.
 
-```
+```bash
 https://app.terraform.io/app/settings/tokens?source=terraform-login
 ```
 
@@ -512,23 +525,72 @@ We have automated this workaround with the following bash script:
 
 [generate tfrc credentials](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/blob/main/bin/generate_tfrc_credentials).
 
-## Simple GitHub Code Update Flow
+## GitHub Code Update Flow
 
-- **Issue Creation:** Begin by creating new issues. Provide a clear title, add comments, assign labels, and submit the issue.
+1. **Issue Creation:** Begin by creating new issues. Provide a clear title, add comments, assign labels, and submit the issue.
 
-- **Branch Management:** Create a new branch (from the issue), perform a `git fetch`, and switch to the branch in you local repository.
+2. **Branch Management:** Create a new branch (from the issue), perform a `git fetch`, and switch to the branch in you local repository.
 
-- **Action on open Issues:** Address open issues as required, making necessary changes or updates.
+3. **Action on open Issues:** Address open issues as required, making necessary changes or updates.
 
-- **Commit with Caution:** Before committing changes, ensure that there is no sensitive data in the filed being committed. Keep the commits clean and concise.
+4. **Commit with Caution:** Before committing changes, ensure that there is no sensitive data in the filed being committed. Keep the commits clean and concise.
 
-- **Commit and Sync:** Commit the changes and sync them witjh the relevant issue number and name (e.g. '#1 add semantic versioning documentation to project').
+5. **Commit and Sync:** Commit the changes and sync them witjh the relevant issue number and name (e.g. '#1 add semantic versioning documentation to project').
 
-- **Pull Request Creation:** Create a `Pull Request`, `Squash and Merge`, and `confirm`.
+6. **Pull Request Creation:** Create a `Pull Request`, `Squash and Merge`, and `confirm`.
 
-- **Maintain Main Branch:** Switch back to the Main branch, pull the latest changes, tag the work e.g. `git tag 1.0.0`, and push the tags `git push --tags` to the main repository.
+7. **Maintain Main Branch:** Switch back to the Main branch, pull the latest changes, tag the work e.g. `git tag 1.0.0`, and push the tags `git push --tags` to the main repository.
 
-- **Review Tag Changes:** Refresh the Git Graph to view the updated tags and changes.    
+8. **Review Tag Changes:** Refresh the Git Graph to view the updated tags and changes.    
 
 ![github_flow](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/3fae048d-4892-4391-989a-661eaebe1f9d)
+
+Follow these guidelines to implement [Semantic Versioning](#semantic-versioning) in Git:
+
+1. **Set Up a Repository:** If you don't already have a Git repository for your project, create one by initiating the **.git** directory.
+
+```sh
+git init
+```
+
+2. **Define Your Version Number**: Start by defining your initial version number. Semantic Versioning follows the format **MAJOR.MINOR.PATCH**, where:
+
+   - `MAJOR` is incremented for significant, backward-incompatible changes.
+   - `MINOR` is incremented for backward-compatible new features or improvements.
+   - `PATCH` is incremented for backward-compatible bug fixes.
+
+For example, if your project is at **version 1.0.0**, you can start with:
+
+```sh
+git tag 1.0.0
+```
+
+3. **Commit Your Changes**: Make sure that each commit message is descriptive and follows a conventional format, which includes a summary and, if needed, a detailed description.
+
+```sh
+git commit -m "feat: Add new feature X"
+git commit -m "fix: Fix issue Y"
+git commit -m "chore: Update dependencies"
+```
+
+4. **Bump Version Numbers**: When you're ready to release a new version, update the version number accordingly in your project. For example, if you are releasing a minor version, update the **MINOR** number:
+
+```sh
+git tag 1.1.0
+```
+
+5. **Write a Changelog**: Create a changelog that details the changes in this release, including new features, bug fixes, and any other noteworthy items. This helps users understand what has changed between versions.
+
+6. **Push to Git**: Push your changes and tags to your Git repository:
+
+```sh
+git push origin master --tags
+```
+
+7. **Publish Your Release**: If your code is already on GitHub, simply push it to your remote.
+
+```bash
+git push --tags
+```
+
 
