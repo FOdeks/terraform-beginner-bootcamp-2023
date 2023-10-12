@@ -484,6 +484,210 @@ This is the backup of the previous state file state.
 This folder is created after executing the `terraform init` command. The directory contains the binaries of Terraform providers.
 
 ### Create S3 Bucket
+
+```
+First of all, the naming conventions between CloudFormation  and Terraform  resources may occasionally align, but this alignment is not always guaranteed. Double-check.
+
+
+### Searching for S3 in Terraform Registry
+
+To start, you need to find the AWS S3 on the Terraform Registry. You can do this by searching for 'S3' in the Terraform Registry.
+
+You can find it [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket). If it is that hard for you to search.
+
+### Define the Terraform Resource
+
+Now, let's define the Terraform resource for the S3 bucket.
+
+You can refer to this: [The reference you've been told](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket).
+
+1. So place this right under the random resource we did earlier;
+
+```hcl
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tf-test-bucket"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
+}
+```
+
+2. Let's temporarily remove the tags since we don't require them at the moment.
+
+```hcl
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tf-test-bucket"
+}
+```
+
+3. Comment it because we need to setup our AWS provider first.
+
+4. Verify by running a terraform init.
+
+- The failure is expected because our random bucket naming process is generating uppercase letters, which are not supported as bucket names in S3.
+
+5. Verify further plan and apply?
+
+> Should fail too. We lack our AWS Provider.
+
+
+### Configure AWS Provider
+
+You need to configure the AWS provider in your Terraform configuration to provide the necessary AWS credentials. 
+
+
+1. Go to the registry and search for aws.
+https://registry.terraform.io/providers/hashicorp/aws/latest
+
+2. Click  USE PROVIDER on the second navbar on the right besides Documenation;
+```hcl
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+```
+
+3. Reflect on our previous provider.
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+```
+
+How are we going to add that?
+
+This looks stupid. We must have a single block for each. So?
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+
+```
+4. Apply critical thinking and get the following results;
+
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1" }
+
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+    
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+
+provider "aws" {
+  # Configuration options
+}
+```
+We had to take aws inside previous provider and put it along the random.
+
+Go try plan the infra. It should fail. <br>
+You added a new provider it must be mapped to your `.terraform` dotfile.
+
+ Init is required.
+
+### Initialize and Plan
+1. Now, you can initialize Terraform by running the following command and should work.
+
+```hcl
+terraform init
+```
+
+![dotfile with bucket](../assets/0.6.0/aws-provider-tf.png)
+
+2. Try running plan. Should gives ok while we both know it is not.
+
+The random is generating the name with capital while bucket only supports low letter.
+
+3. Run `terrafom apply` and observe the failure.
+The plan is not smart enough. Be careful. You could get a green pass and then get rejected in apply.
+
+We will address this issue next.
+
+### Fixing Bucket Naming Issue
+
+To resolve the bucket naming issue, modify the resource definition as follows.
+
+1. Change the bucket name from that to `random_string.bucket_name.result`
+```
+resource "aws_s3_bucket" "example" {
+  bucket = random_string.bucket_name.result
+}
+```
+
+Ensure you have previously defined `random_string.bucket_name.result` like I showed you.
+
+2. Update the resource definition for random as required and Set length to reduce the chance of conflicts.
+
+From this;
+```
+resource "random_string" "bucket_name" {
+  length           = 16
+  special          = false
+}
+```
+
+To that;
+```
+resource "random_string" "bucket_name" {
+  lower = true
+  upper = false
+  length   = 32
+  special  = false
+}
+```
+```
+
 #### Note: S3 Bucket Creation
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
