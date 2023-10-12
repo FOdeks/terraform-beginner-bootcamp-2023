@@ -1,8 +1,9 @@
 # Terraform Beginner Bootcamp 2023
 ## Week 2 - Launching and Connection Terrahome to TerraTowns
 ### Programming Languages
-- Ruby
-- Go
+- Ruby for Web Server
+- Go for Terraform Provider
+___
 
 ## Deploying To TerraTowns
 
