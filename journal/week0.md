@@ -124,9 +124,7 @@ It uses a simple and intuitive system of symbols and formatting rules to define 
 `inline code`
 
 #```
-
 code block
-
 #```
 ```
 
