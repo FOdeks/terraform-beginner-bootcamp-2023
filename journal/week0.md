@@ -582,6 +582,7 @@ terraform {
       source = "hashicorp/aws"
       version = "5.17.0"
     }
+
     random = {
       source = "hashicorp/random"
       version = "3.5.1"
@@ -661,6 +662,8 @@ resource "random_string" "bucket_name" {
   special  = false
 }
 ```
+
+Run `terraform apply` again to create the S3 bucket.
 
 ## Terraform Cloud
 
