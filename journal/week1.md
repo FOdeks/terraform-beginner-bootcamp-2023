@@ -283,6 +283,9 @@ We can set two kinds of variables in **Terraform Cloud**:
 
 We can set variables in Terraform Cloud to be ***sensitive*** so they are not visible (i.e. masked) in the UI.
 
+![terraform_cloud_variable](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/3807538a-0cd4-4386-bf1d-bd02f937e643)
+
+
 ## Dealing With Configuration Drift
 
 ### What happens if we lose our State file?
@@ -376,13 +379,13 @@ module "ec2_instance" {
 }
 ```
 
-- **module** ***"ec2_instance"*** is the name you are giving to your module instance. You can choose any name you prefer.
+- **module** **"ec2_instance"** is the name you are giving to your module instance. You can choose any name you prefer.
 - **source** points to the directory containing the ec2 module. The path can be relative or absolute, depending on your project's structure.
 - **instance_count**, **instance_type**, and **ami_id** are input variables that the ec2 module expects.
 
 Make sure these variable names match the input variable names defined in the module's **variables.tf** file.
 
-In this example, the ec2 directory contains the Terraform configuration files and logic for creating the EC2 instances, and the module is instantiated in the main configuration with specific input values.
+In this example, the **ec2** directory contains the Terraform configuration files and logic for creating the EC2 instances, and the module is instantiated in the main configuration with specific input values.
 
 Another example:
 ```tf
@@ -479,6 +482,7 @@ my_project/
     └── module1/
         └── child.tf
 ```
+
 To reference **child.tf** from within **main.tf**, you can use a relative path: `./modules/module1/child.tf`.
 
 #### Using Relative Path
