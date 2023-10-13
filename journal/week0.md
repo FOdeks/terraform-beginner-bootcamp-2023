@@ -211,6 +211,7 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=jammy
 ```
+
 [How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
 
 ### Refactoring into Bash Scripts
@@ -326,12 +327,11 @@ You can also set environmnent variables in the `.gitpod.yml` but this can only c
 
 AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli`](./bin/install_aws_cli)
 
-
 [Getting Started Install (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 [Configure AWS CLI Environment Variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
 
-We can check if our AWS credentials is configured correctly by running the following AWS CLI command:
+We can check if the AWS credentials is configured correctly by running the following AWS CLI command:
 
 ```sh
 aws sts get-caller-identity
@@ -347,7 +347,7 @@ If it is succesful you should see a json payload return that looks like this:
 }
 ```
 
-We will need to generate AWS CLI credentials from IAM User in order to the user AWS CLI.
+> **Note:** We need to generate AWS CLI credentials from IAM User in order to the user AWS CLI.
 
 ## Terraform Basics
 
@@ -356,27 +356,7 @@ We will need to generate AWS CLI credentials from IAM User in order to the user 
 Terraform sources their providers and modules from the Terraform Registry which is located at [registry.terraform.io](https://registry.terraform.io/)
 
 - **Providers** is an interface to APIs that will allow for creating resources in terraform, e.g. [hashicorp/random](https://registry.terraform.io/providers/hashicorp/random).
-
-  The **random** provider is declared in the **main** Terraform configuration file as follows:
-
-```tf
-terraform {
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-  }
-}
-
-provider "random" {
-  # Configuration options
-}
-```
-
 - **Modules** are a way to make large amount of Terraform code modular, portable and sharable.
-
-> **Note:** The `main.tf` configuration file is considered the top root module in Terraform. Modules are built within the root module. 
 
 ### Terraform Workflow
 
@@ -485,25 +465,144 @@ This folder is created after executing the `terraform init` command. The directo
 
 ### Create S3 Bucket
 
+Create AWS S3 Bucket in Terrafrom using the **random** provider to genrate a bucket name.
+
+1. Declare the **random** provider in the **main.tf** Terraform configuration file as follows:
+
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
 ```
-First of all, the naming conventions between CloudFormation  and Terraform  resources may occasionally align, but this alignment is not always guaranteed. Double-check.
 
+2. Locate the **random_string** resource in the Terraform Registry:
 
-### Searching for S3 in Terraform Registry
+```tf
+resource "random_string" "bucket_name" {
+  length           = 16
+  special          = true
+  override_special = "/@£$"
+```
 
-To start, you need to find the AWS S3 on the Terraform Registry. You can do this by searching for 'S3' in the Terraform Registry.
+3. From  `override_special =`, remove the **"/@£$"**.
 
-You can find it [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket). If it is that hard for you to search.
+```tf
+resource "random_string" "bucket_name" {
+  length           = 16
+  special          = true
+  override_special = ""
+}
+```
 
-### Define the Terraform Resource
+   Or just delete the `override_special` code and change the flag for `special` to **false**:
 
-Now, let's define the Terraform resource for the S3 bucket.
+```tf
+resource "random_string" "bucket_name" {
+  length           = 16
+  special          = false
+}
+```
 
-You can refer to this: [The reference you've been told](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket).
+4. Add an **output** block to return the random string value and use this for the bucket name:
 
-1. So place this right under the random resource we did earlier;
+```tf
+output "random_bucket_name" {
+ value = random_string.bucket_name.result
+}
+```
+
+> **Note:** The **main.tf** configuration file is considered the top root module in Terraform. Modules are built within the root module. 
+
+5. Configure the **AWS** provider in your Terraform configuration.
+ 
+6. Go to the Terrafrom registry and search for **AWS** [provider](https://registry.terraform.io/providers/hashicorp/aws/latest) code.
+
+   To install this provider, copy the code:
 
 ```hcl
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+```
+
+7. Paste this code into your Terraform configuration i.e. **main.tf**.:
+
+```tf
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+```
+
+8. Combine the **required_providers** code for **aws** and **random**
+
+```tf
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+
+provider "aws" {
+  # Configuration options
+}
+```
+
+9. Search for the **aws_s3_bucket** resource code in the Terraform registry. You can find it [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket). 
+
+10. Copy and paste the s3 resource code into the Terraform configuration: 
+
+```tf
 resource "aws_s3_bucket" "example" {
   bucket = "my-tf-test-bucket"
 
@@ -514,162 +613,18 @@ resource "aws_s3_bucket" "example" {
 }
 ```
 
-2. Let's temporarily remove the tags since we don't require them at the moment.
+11. Change the bucket name from **"my-tf-test-bucket"** to **random_string.bucket_name.result**
 
-```hcl
-resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket"
-}
-```
-
-3. Comment it because we need to setup our AWS provider first.
-
-4. Verify by running a terraform init.
-
-- The failure is expected because our random bucket naming process is generating uppercase letters, which are not supported as bucket names in S3.
-
-5. Verify further plan and apply?
-
-> Should fail too. We lack our AWS Provider.
-
-
-### Configure AWS Provider
-
-You need to configure the AWS provider in your Terraform configuration to provide the necessary AWS credentials. 
-
-
-1. Go to the registry and search for aws.
-https://registry.terraform.io/providers/hashicorp/aws/latest
-
-2. Click  USE PROVIDER on the second navbar on the right besides Documenation;
-```hcl
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.17.0"
-    }
-  }
-}
-
-provider "aws" {
-  # Configuration options
-}
-```
-
-3. Reflect on our previous provider.
-```tf
-terraform {
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-  }
-}
-
-provider "random" {
-  # Configuration options
-}
-```
-
-How are we going to add that?
-
-This looks stupid. We must have a single block for each. So?
-```tf
-terraform {
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-  }
-}
-
-provider "random" {
-  # Configuration options
-}
-
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.17.0"
-    }
-  }
-}
-
-provider "aws" {
-  # Configuration options
-}
-
-```
-4. Apply critical thinking and get the following results;
-
-```tf
-terraform {
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1" }
-
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.17.0"
-    }
-    
-  }
-}
-
-provider "random" {
-  # Configuration options
-}
-
-provider "aws" {
-  # Configuration options
-}
-```
-We had to take aws inside previous provider and put it along the random.
-
-Go try plan the infra. It should fail. <br>
-You added a new provider it must be mapped to your `.terraform` dotfile.
-
- Init is required.
-
-### Initialize and Plan
-1. Now, you can initialize Terraform by running the following command and should work.
-
-```hcl
-terraform init
-```
-
-![dotfile with bucket](../assets/0.6.0/aws-provider-tf.png)
-
-2. Try running plan. Should gives ok while we both know it is not.
-
-The random is generating the name with capital while bucket only supports low letter.
-
-3. Run `terrafom apply` and observe the failure.
-The plan is not smart enough. Be careful. You could get a green pass and then get rejected in apply.
-
-We will address this issue next.
-
-### Fixing Bucket Naming Issue
-
-To resolve the bucket naming issue, modify the resource definition as follows.
-
-1. Change the bucket name from that to `random_string.bucket_name.result`
 ```
 resource "aws_s3_bucket" "example" {
   bucket = random_string.bucket_name.result
 }
 ```
 
-Ensure you have previously defined `random_string.bucket_name.result` like I showed you.
+12. Update the resource definition for **random** as required and increase the **length** to reduce the chance of conflicts (S3 Bucket name must be unique).
 
-2. Update the resource definition for random as required and Set length to reduce the chance of conflicts.
+   From:
 
-From this;
 ```
 resource "random_string" "bucket_name" {
   length           = 16
@@ -677,7 +632,8 @@ resource "random_string" "bucket_name" {
 }
 ```
 
-To that;
+   To:
+
 ```
 resource "random_string" "bucket_name" {
   lower = true
@@ -686,12 +642,25 @@ resource "random_string" "bucket_name" {
   special  = false
 }
 ```
-```
 
-#### Note: S3 Bucket Creation
+   Run `terraform init` and then `terraform apply`. An error with the bucket name is returned.
+
+**Fixing Bucket Naming Issue**
+
+**Note:** In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We reviewed the Random documentation and reset the random_string options. We added `lower=true`, `upper=false` and `special=false`.
+
 [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
 
-In creating the S3 Bucket, and using the random provider to generate a bucket name, upper case characters which violated the bucket naming rules were generated. We reviewed the Random documentation and reset the random_string options. We added `lower=true`, `upper=false` and `special=false`.
+13. To resolve the bucket naming issue, modify the resource definition for **random** as follows.
+
+```
+resource "random_string" "bucket_name" {
+  lower = true
+  upper = false
+  length   = 32
+  special  = false
+}
+```
 
 ## Terraform Cloud
 
