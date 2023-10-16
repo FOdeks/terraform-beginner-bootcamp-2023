@@ -63,3 +63,107 @@ DESCRIPTION
   town            = "cooker-cove"
   content_version = var.crabdish.content_version
 }
+
+/*
+Alternative solution from a Terraformer to simplify the process of creating multiple homes. Add a module and resource to the main.tf file and declare new variables.
+The solution involves making changes to a single file.- 
+
+Here is what i did:
+
+I've created a file named locals.tf where I've stored the values required to create our resources. The "hostings" contains values required by the module "terrahome_aws", and the "homes"  has values needed by our resource "terratowns_home".
+
+locals {
+  hostings = {
+    "home_name1_hosting" = {
+        public_path = "/workspace/terraform-beginner-bootcamp-2023/public/name1"
+        content_version = 1
+    }
+  }
+  homes = {
+    "home_name1" = {
+        name = "Title for the home"
+        description = <<DESCRIPTION
+        Description of the home.
+        DESCRIPTION
+        domain_name = module.terrahome_aws["home_name1_hosting"].domain_name
+        town = "missingo"
+        content_version = 1
+    }
+  }
+}
+
+In the main.tf file, I used the for_each loop to pass values to the module and resource, so it will execute for every hosting and home provided in the locals.tf file.
+
+module "terrahome_aws" {
+  for_each = local.hostings
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = each.value.public_path
+  content_version = each.value.content_version
+}
+
+resource "terratowns_home" "home" {
+  for_each = local.homes
+  name = each.value.name
+  description = each.value.description
+  domain_name = each.value.domain_name
+  town =  each.value.town
+  content_version = each.value.content_version
+}
+
+
+And in output.tf, for each output, I used a for loop to retrieve values from the module for each home.
+
+output "bucket_name" {
+  description = "Bucket name for our static website hosting"
+  value = {for k in keys(local.hostings) : k => module.terrahome_aws[k].bucket_name}
+}
+
+output "s3_website_endpoint" {
+  description = "S3 Static Website hosting endpoint"
+  value = {for k in keys(local.hostings) : k => module.terrahome_aws[k].website_endpoint}
+}
+
+output "cloudfront_url" {
+  description = "The CloudFront Distribution Domain Name"
+  value = {for k in keys(local.hostings) : k => module.terrahome_aws[k].domain_name}
+}
+
+
+I deleted the object type variables related to homes from the variables.tf and .tfvars files.
+
+Now, when we want to create a new home, we only need to make modifications in the locals.tf file: add a new "home_name2_hosting" with its values to the hostings section and add a new "name2" home with its values to the homes section.
+
+locals {
+  hostings = {
+    "home_name1_hosting" = {
+        public_path = "/workspace/terraform-beginner-bootcamp-2023/public/name1"
+        content_version = 1
+    }
+    "home_name2_hosting" = {
+        public_path = "/workspace/terraform-beginner-bootcamp-2023/public/name2"
+        content_version = 1
+    }
+  }
+  homes = {
+    "home_name1" = {
+        name = "Title for the home"
+        description = <<DESCRIPTION
+        Description of the home.
+        DESCRIPTION
+        domain_name = module.terrahome_aws["home_name1_hosting"].domain_name
+        town = "missingo"
+        content_version = 1
+    }
+    "home_name2" = {
+        name = "Title for the home"
+        description = <<DESCRIPTION
+        Description for the home
+        DESCRIPTION
+        domain_name = module.terrahome_aws["home_name2_hosting"].domain_name
+        town = "missingo"
+        content_version = 1
+    }
+  }
+}
+*/
