@@ -166,6 +166,6 @@ a1003 - token/code/acess-code and user_uuid
 Terraform has detailed logs that you can enable by setting the `TF_LOG` environment variable to any value. Enabling this setting causes detailed logs to appear on `stderr`.
 
 ```bash
-TF_LOG=DEBUG tf init
+TF_LOG=DEBUG terraform init
 ```
 [Debugging](https://developer.hashicorp.com/terraform/internals/debugging)
