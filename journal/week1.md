@@ -1,4 +1,3 @@
-# Terraform Beginner Bootcamp 2023
 ## Week 1 - Getting Comfortable with Terraform and Terraform Cloud
 - Providers vs Modules
 - Using a Module (Inputs and Outputs)
