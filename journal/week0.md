@@ -1,4 +1,3 @@
-# Terraform Beginner Bootcamp 2023
 ## Week 0 - Getting Prepped!
 - Creating a Discord Account and Verifying Email
 - How to ask a good question to get help in the Discord
