@@ -35,11 +35,11 @@ ___
 
 ### Bundler
 
-Bundler is a package manager for ``Ruby``. It is the primary way to install Ruby packages (known as gems) for Ruby.
+Bundler is a package manager for **Ruby**. It is the primary way to install Ruby packages (known as gems) for Ruby.
 
 #### Installing Gems
 
-You need to create a Gemfile and define your ``gems`` in that file.
+You need to create a **Gemfile** and define your **gems** in that file.
 
 ```rb
 source "https://rubygems.org"
@@ -53,9 +53,9 @@ gem 'activerecord'
 
 Then you need to run the `bundle install` command.
 
-This will install the gems on the system globally (unlike .nodejs which install packages in place in a folder called node_modules).
+This will install the **gems** on the system globally (unlike .nodejs which install packages in place in a folder called node_modules).
 
-A ``Gemfile.lock`` will be created to lock down the gem versions used in the project.
+A **Gemfile.lock** will be created to lock down the gem versions used in the project.
 
 #### Executing Ruby scripts in the context of Bundler
 
@@ -76,7 +76,7 @@ Sinatra is a micro web-framework for ruby to build web-apps.
 ## Custom Provider
 **Custom provider** named **terraform-provider-terratowns**. 
 
-Provider Physical Diagram
+**Provider Physical Diagram**
 ![provider_physical_diagram](https://github.com/FOdeks/terraform-beginner-bootcamp-2023/assets/99102643/7fd68fef-97f0-43ad-8ad0-dbb60d21e663)
 
 ### CRUD
