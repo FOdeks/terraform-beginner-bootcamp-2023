@@ -52,9 +52,9 @@ ___
     + [Terraform Directory](#terraform-directory)
   * [Create S3 Bucket](#create-s3-bucket)
 - [Terraform Cloud](#terraform-cloud)
-  * [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
   * [Key Features and Functions of Terraform Cloud](#key-features-and-functions-of-terraform-cloud)
   * [Migrating Terraform State File from Local Environment](#migrating-terraform-state-file-from-local-environment)
+  *  [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
 - [GitHub Code Update Flow](#github-code-update-flow)
 
 ## Semantic Versioning
